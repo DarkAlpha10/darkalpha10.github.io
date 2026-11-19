@@ -51,14 +51,14 @@ a {
 
 .container {
     width: min(1120px, calc(100% - 50px));
-    margin: auto;
+    margin-inline: auto;
 }
 
 /* HEADER */
 
 header {
     border-bottom: 1px solid var(--border);
-    background: #090909e8;
+    background: #090909ee;
 }
 
 .navbar {
@@ -92,7 +92,7 @@ header {
     font-size: 11px;
     font-weight: 700;
     letter-spacing: 2px;
-    padding: 10px 0;
+    padding: 12px 0;
     transition: .25s;
 }
 
@@ -103,10 +103,6 @@ header {
 
 .nav-links a.active {
     border-bottom: 2px solid var(--red);
-}
-
-.nav-links a:hover {
-    color: var(--red);
 }
 
 /* HERO */
@@ -192,12 +188,13 @@ h1 span {
     display: block;
     width: 100%;
     height: auto;
+    aspect-ratio: auto;
     border-radius: 14px;
     object-fit: contain;
     background: #080808;
 }
 
-/* SOCIAL */
+/* SECTION TITLE */
 
 .section-heading {
     display: flex;
@@ -218,6 +215,8 @@ h1 span {
     flex: 1;
     background: linear-gradient(90deg, #8d2424, transparent);
 }
+
+/* SOCIAL */
 
 .social-grid {
     display: grid;
@@ -245,10 +244,6 @@ h1 span {
     border-color: var(--red);
     background: #211010;
     box-shadow: 0 8px 25px #ed252d17;
-}
-
-.social:active {
-    transform: scale(.97);
 }
 
 .social-icon {
@@ -370,7 +365,7 @@ footer span {
     }
 
     .art-frame {
-        max-width: 350px;
+        max-width: 390px;
     }
 
     .social-grid {
@@ -387,21 +382,21 @@ footer span {
 
     .navbar {
         min-height: 72px;
-        gap: 10px;
+        gap: 8px;
     }
 
     .logo {
-        font-size: 14px;
+        font-size: 13px;
         letter-spacing: 0;
     }
 
     .nav-links {
-        gap: 13px;
+        gap: 12px;
     }
 
     .nav-links a {
         font-size: 9px;
-        letter-spacing: .5px;
+        letter-spacing: .4px;
     }
 
     .hero {
@@ -425,9 +420,13 @@ footer span {
     }
 
     .art-frame {
-        max-width: 310px;
+        max-width: 100%;
         padding: 5px;
         border-radius: 15px;
+    }
+
+    .art-frame img {
+        border-radius: 11px;
     }
 
     .section-heading h2 {
@@ -473,7 +472,7 @@ footer span {
     }
 
     .logo {
-        font-size: 12px;
+        font-size: 11px;
     }
 
     h1 {
@@ -494,7 +493,7 @@ footer span {
 
         <nav class="nav-links">
             <a href="#home" class="active">HOME</a>
-            <a href="#" aria-label="Game profile page coming later">GAME PROFILE</a>
+            <a href="#" aria-label="Game profile coming soon">GAME PROFILE</a>
         </nav>
 
     </div>
@@ -529,7 +528,11 @@ footer span {
 
         </div>
 
-        <img src="./profile.png" alt="DarkAlpha10 Profile">
+        <!-- IMAGE: profile.png must be beside index.html -->
+
+        <div class="art-frame">
+            <img src="profile.png" alt="DarkAlpha10 Profile">
+        </div>
 
     </section>
 
@@ -545,7 +548,7 @@ footer span {
         <div class="social-grid">
 
             <!-- WHATSAPP -->
-            <!-- Replace # with your WhatsApp profile/share link -->
+            <!-- Replace # with your WhatsApp link -->
 
             <a class="social" href="#" target="_blank" rel="noopener">
 
@@ -557,14 +560,16 @@ footer span {
 
                 <div class="social-info">
                     <strong>WhatsApp</strong>
-                    <small>Connect with me</small>
+                    <small>@DarkAlpha10</small>
                 </div>
 
             </a>
 
             <!-- TELEGRAM -->
 
-            <a class="social" href="https://t.me/DarkAlpha10" target="_blank" rel="noopener">
+            <a class="social"
+               href="https://t.me/DarkAlpha10"
+               target="_blank" rel="noopener">
 
                 <div class="social-icon">
                     <svg viewBox="0 0 24 24">
@@ -581,7 +586,9 @@ footer span {
 
             <!-- YOUTUBE -->
 
-            <a class="social" href="https://www.youtube.com/@PeaceWithQuran-f6o" target="_blank" rel="noopener">
+            <a class="social"
+               href="https://www.youtube.com/@PeaceWithQuran-f6o"
+               target="_blank" rel="noopener">
 
                 <div class="social-icon">
                     <svg viewBox="0 0 24 24">
@@ -598,7 +605,9 @@ footer span {
 
             <!-- FACEBOOK -->
 
-            <a class="social" href="https://www.facebook.com/profile.php?id=61594039526261" target="_blank" rel="noopener">
+            <a class="social"
+               href="https://www.facebook.com/profile.php?id=61594039526261"
+               target="_blank" rel="noopener">
 
                 <div class="social-icon">
                     <svg viewBox="0 0 24 24">
