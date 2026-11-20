@@ -1,0 +1,1088 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090909">
+<meta name="description" content="DarkAlpha10 Free Fire Gaming Profile">
+<title>DarkAlpha10 | Game Profile</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+    --red: #ed252d;
+    --gold: #d9ae62;
+    --bg: #090909;
+    --panel: #141414;
+    --border: #292929;
+    --muted: #999;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background:
+        radial-gradient(ellipse at 10% 10%, #3b090922, transparent 40%),
+        radial-gradient(ellipse at 90% 90%, #5c3b1020, transparent 40%),
+        var(--bg);
+    color: white;
+    font-family: Inter, Arial, sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.container {
+    width: min(1120px, calc(100% - 50px));
+    margin: auto;
+}
+
+/* HEADER - EXACT HOME NAVIGATION */
+
+header {
+    border-bottom: 1px solid var(--border);
+    background: #090909ed;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(14px);
+}
+
+.navbar {
+    min-height: 85px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.logo {
+    font-family: Orbitron, sans-serif;
+    font-weight: 900;
+    font-size: 19px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--red);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 11px;
+    color: #aaa;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    padding: 14px 18px;
+    border: 1px solid transparent;
+    border-radius: 10px;
+    transition: .3s;
+}
+
+.nav-links a i {
+    font-size: 17px;
+    transition: .3s;
+}
+
+.nav-links a:hover {
+    color: white;
+    background: #ed252d12;
+    border-color: #ed252d55;
+}
+
+.nav-links a:hover i {
+    color: var(--red);
+    transform: scale(1.12);
+}
+
+.nav-links a.active {
+    color: white;
+    background: linear-gradient(135deg, #ed252d24, #ed252d08);
+    border-color: #ed252d66;
+    box-shadow: 0 0 20px #ed252d12;
+}
+
+.nav-links a.active i {
+    color: var(--red);
+}
+
+.nav-links a:active {
+    transform: scale(.96);
+}
+
+/* HERO */
+
+.hero {
+    text-align: center;
+    padding: 75px 0 45px;
+}
+
+.eyebrow {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(35px, 5vw, 58px);
+    line-height: 1.2;
+    letter-spacing: -1px;
+}
+
+h1 span {
+    color: var(--red);
+    text-shadow: 0 0 25px #ed252d44;
+}
+
+.hero-description {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.9;
+    max-width: 500px;
+    margin: 20px auto 0;
+}
+
+/* PLAYER PROFILE */
+
+.player-section {
+    max-width: 850px;
+    margin: 0 auto;
+}
+
+.player-card {
+    background: linear-gradient(145deg, #191919, #101010);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 30px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.player-card::before {
+    content: "";
+    position: absolute;
+    width: 250px;
+    height: 250px;
+    background: #ed252d0b;
+    filter: blur(70px);
+    top: -120px;
+    left: 50%;
+    transform: translateX(-50%);
+    pointer-events: none;
+}
+
+.player-image {
+    width: 190px;
+    height: 190px;
+    margin: 0 auto 22px;
+    padding: 5px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--red), #242424 50%, var(--gold));
+    box-shadow: 0 10px 40px #000;
+    position: relative;
+}
+
+.player-image img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    border-radius: 50%;
+    background: #111;
+}
+
+.player-name {
+    font-family: Orbitron, sans-serif;
+    font-size: clamp(21px, 4vw, 30px);
+    color: white;
+    margin-bottom: 10px;
+    overflow-wrap: anywhere;
+}
+
+.player-guild {
+    color: var(--gold);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+}
+
+.player-tags {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+}
+
+.player-tag {
+    background: #202020;
+    border: 1px solid #353535;
+    color: #bbb;
+    padding: 10px 15px;
+    border-radius: 9px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.player-tag i {
+    color: var(--red);
+    margin-right: 6px;
+}
+
+/* UID */
+
+.uid-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 20px;
+    padding: 18px 20px;
+    background: #111;
+    border: 1px solid var(--border);
+    border-radius: 13px;
+}
+
+.uid-text {
+    color: #ddd;
+    font-family: Orbitron, sans-serif;
+    font-size: 13px;
+    letter-spacing: 1px;
+    overflow-wrap: anywhere;
+}
+
+.uid-text span {
+    color: var(--gold);
+}
+
+.copy-btn {
+    border: 1px solid #713030;
+    background: #ed252d15;
+    color: white;
+    border-radius: 9px;
+    padding: 11px 16px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    cursor: pointer;
+    transition: .3s;
+    font-family: Inter, sans-serif;
+}
+
+.copy-btn i {
+    color: var(--red);
+    margin-right: 6px;
+}
+
+.copy-btn:hover {
+    background: #ed252d2a;
+    border-color: var(--red);
+}
+
+.copy-btn:active {
+    transform: scale(.96);
+}
+
+/* SECTION HEADING */
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin: 55px 0 24px;
+}
+
+.section-heading h2 {
+    font-family: Orbitron, sans-serif;
+    font-size: 17px;
+    letter-spacing: 2px;
+    white-space: nowrap;
+}
+
+.section-heading .line {
+    height: 1px;
+    flex: 1;
+    background: linear-gradient(90deg, #8d2424, transparent);
+}
+
+/* STATISTICS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.stat-card {
+    min-width: 0;
+    min-height: 125px;
+    padding: 22px;
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    background: linear-gradient(145deg, #191919, #101010);
+    border: 1px solid var(--border);
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.stat-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--red);
+    box-shadow: 0 8px 25px #ed252d12;
+}
+
+.stat-icon {
+    width: 48px;
+    height: 48px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: var(--red);
+    background: #ed252d13;
+    border: 1px solid #ed252d25;
+    border-radius: 13px;
+    font-size: 19px;
+}
+
+.stat-info {
+    min-width: 0;
+}
+
+.stat-info small {
+    display: block;
+    color: #888;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 9px;
+}
+
+.stat-info strong {
+    display: block;
+    font-family: Orbitron, sans-serif;
+    font-size: 20px;
+    color: white;
+    overflow-wrap: anywhere;
+}
+
+/* RANK DETAILS */
+
+.rank-section {
+    margin-top: 45px;
+}
+
+.rank-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 15px;
+}
+
+.rank-card {
+    padding: 23px;
+    background: linear-gradient(145deg, #191919, #101010);
+    border: 1px solid #4b3920;
+    border-radius: 15px;
+    transition: .3s;
+}
+
+.rank-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--gold);
+}
+
+.rank-top {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+}
+
+.rank-icon {
+    width: 42px;
+    height: 42px;
+    display: grid;
+    place-items: center;
+    border-radius: 12px;
+    color: var(--gold);
+    background: #d9ae6215;
+    font-size: 17px;
+}
+
+.rank-top h3 {
+    font-family: Orbitron, sans-serif;
+    font-size: 13px;
+}
+
+.rank-level {
+    color: var(--gold);
+    font-family: Orbitron, sans-serif;
+    font-size: 23px;
+    font-weight: 800;
+}
+
+.rank-season {
+    display: block;
+    color: #888;
+    font-size: 11px;
+    margin-top: 8px;
+}
+
+/* GAME BUTTONS */
+
+.game-actions {
+    margin-top: 55px;
+    padding: 30px;
+    border: 1px solid #4b3920;
+    border-radius: 18px;
+    background: linear-gradient(110deg, #1c170f, #111);
+    text-align: center;
+}
+
+.game-actions h3 {
+    color: var(--gold);
+    font-family: Orbitron, sans-serif;
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.game-actions p {
+    color: #999;
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.action-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 21px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    transition: .3s;
+}
+
+.action-btn.primary {
+    background: var(--red);
+    color: white;
+    border: 1px solid var(--red);
+}
+
+.action-btn.secondary {
+    background: #d9ae6212;
+    color: var(--gold);
+    border: 1px solid #70552b;
+}
+
+.action-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 25px #0008;
+}
+
+.action-btn:active {
+    transform: scale(.97);
+}
+
+/* FOOTER */
+
+footer {
+    margin-top: 65px;
+    padding: 27px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    color: #777;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+footer span {
+    color: var(--red);
+}
+
+/* TABLET */
+
+@media (max-width: 850px) {
+    .container {
+        width: min(680px, calc(100% - 36px));
+    }
+
+    .hero {
+        padding: 55px 0 35px;
+    }
+}
+
+/* MOBILE - EXACT HOME NAVIGATION */
+
+@media (max-width: 520px) {
+    .container {
+        width: calc(100% - 30px);
+    }
+
+    .navbar {
+        min-height: 76px;
+        gap: 8px;
+    }
+
+    .logo {
+        font-size: 13px;
+        letter-spacing: 0;
+    }
+
+    .nav-links {
+        gap: 5px;
+    }
+
+    .nav-links a {
+        gap: 6px;
+        font-size: 9px;
+        letter-spacing: 0;
+        padding: 11px 9px;
+        border-radius: 8px;
+    }
+
+    .nav-links a i {
+        font-size: 14px;
+    }
+
+    .hero {
+        padding: 45px 0 35px;
+        gap: 30px;
+    }
+
+    .eyebrow {
+        font-size: 10px;
+        letter-spacing: 3px;
+    }
+
+    h1 {
+        font-size: clamp(32px, 9vw, 43px);
+        letter-spacing: -1px;
+    }
+
+    .hero-description {
+        font-size: 13px;
+        line-height: 1.9;
+    }
+
+    .player-card {
+        padding: 22px 15px;
+    }
+
+    .player-image {
+        width: 155px;
+        height: 155px;
+    }
+
+    .player-name {
+        font-size: 21px;
+    }
+
+    .uid-box {
+        padding: 15px;
+    }
+
+    .uid-text {
+        font-size: 11px;
+    }
+
+    .copy-btn {
+        padding: 10px 12px;
+    }
+
+    .section-heading h2 {
+        font-size: 13px;
+        letter-spacing: 1px;
+    }
+
+    .stats-grid,
+    .rank-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 11px;
+    }
+
+    .stat-card {
+        min-height: 115px;
+        padding: 14px 10px;
+        gap: 10px;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: center;
+    }
+
+    .stat-icon {
+        width: 37px;
+        height: 37px;
+        font-size: 15px;
+        border-radius: 10px;
+    }
+
+    .stat-info small {
+        font-size: 9px;
+        letter-spacing: 1px;
+        margin-bottom: 7px;
+    }
+
+    .stat-info strong {
+        font-size: 16px;
+    }
+
+    .rank-card {
+        padding: 15px 11px;
+    }
+
+    .rank-top {
+        gap: 8px;
+    }
+
+    .rank-top h3 {
+        font-size: 10px;
+    }
+
+    .rank-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 14px;
+    }
+
+    .rank-level {
+        font-size: 19px;
+    }
+
+    .game-actions {
+        padding: 22px 15px;
+    }
+
+    .game-actions h3 {
+        font-size: 17px;
+    }
+
+    .action-buttons {
+        flex-direction: column;
+    }
+
+    .action-btn {
+        width: 100%;
+    }
+
+    footer {
+        margin-top: 45px;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+}
+
+@media (max-width: 350px) {
+    .nav-links a {
+        gap: 4px;
+        font-size: 8px;
+        padding: 9px 6px;
+    }
+
+    .nav-links a i {
+        font-size: 12px;
+    }
+
+    .logo {
+        font-size: 11px;
+    }
+
+    h1 {
+        font-size: 30px;
+    }
+
+    .stat-info strong {
+        font-size: 14px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+
+<header>
+    <div class="container navbar">
+
+        <a href="index.html" class="logo">
+            DARK<span>ALPHA10</span>
+        </a>
+
+        <nav class="nav-links">
+
+            <a href="index.html">
+                <i class="fa-solid fa-house"></i>
+                <span>HOME</span>
+            </a>
+
+            <a href="game-profile.html" class="active">
+                <i class="fa-solid fa-gamepad"></i>
+                <span>GAME PROFILE</span>
+            </a>
+
+        </nav>
+
+    </div>
+</header>
+
+<main class="container">
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="eyebrow">FREE FIRE PLAYER PROFILE</div>
+
+        <h1>
+            DARK ALPHA<br>
+            <span>GAMING</span>
+        </h1>
+
+        <p class="hero-description">
+            Welcome to my gaming profile.
+            Discover my Free Fire identity,
+            player statistics and ranked achievements.
+        </p>
+
+    </section>
+
+    <!-- PLAYER PROFILE -->
+
+    <section class="player-section" id="player">
+
+        <div class="player-card">
+
+            <div class="player-image">
+                <img src="./gameprofile.png" alt="DarkAlpha10 Free Fire Profile">
+            </div>
+
+            <h2 class="player-name">hAmEeD_aMiRi</h2>
+
+            <div class="player-guild">
+                <i class="fa-solid fa-shield-halved"></i>
+                BAGHLAN_LION
+            </div>
+
+            <div class="player-tags">
+
+                <div class="player-tag">
+                    <i class="fa-solid fa-globe"></i>
+                    Middle East
+                </div>
+
+                <div class="player-tag">
+                    <i class="fa-solid fa-users"></i>
+                    Baghlan_Lion
+                </div>
+
+                <div class="player-tag">
+                    <i class="fa-solid fa-gamepad"></i>
+                    Free Fire
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- UID -->
+
+        <div class="uid-box">
+
+            <div class="uid-text">
+                UID: <span id="playerUID">15779024115</span>
+            </div>
+
+            <button class="copy-btn" id="copyUID" type="button">
+                <i class="fa-regular fa-copy"></i>
+                COPY UID
+            </button>
+
+        </div>
+
+    </section>
+
+    <!-- STATISTICS -->
+
+    <section>
+
+        <div class="section-heading">
+            <h2>PLAYER STATISTICS</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-star"></i>
+                </div>
+
+                <div class="stat-info">
+                    <small>PLAYER LEVEL</small>
+                    <strong>42</strong>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-heart"></i>
+                </div>
+
+                <div class="stat-info">
+                    <small>LIKES</small>
+                    <strong>250</strong>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-trophy"></i>
+                </div>
+
+                <div class="stat-info">
+                    <small>BR RANKED</small>
+                    <strong>HEROIC</strong>
+                </div>
+
+            </div>
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    <i class="fa-solid fa-crosshairs"></i>
+                </div>
+
+                <div class="stat-info">
+                    <small>CS RANKED</small>
+                    <strong>HEROIC</strong>
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- RANK DETAILS -->
+
+    <section class="rank-section">
+
+        <div class="section-heading">
+            <h2>RANKED ACHIEVEMENTS</h2>
+            <div class="line"></div>
+        </div>
+
+        <div class="rank-grid">
+
+            <div class="rank-card">
+
+                <div class="rank-top">
+
+                    <div class="rank-icon">
+                        <i class="fa-solid fa-trophy"></i>
+                    </div>
+
+                    <h3>BATTLE ROYALE</h3>
+
+                </div>
+
+                <div class="rank-level">HEROIC</div>
+
+                <span class="rank-season">
+                    BR Ranked | Season 3
+                </span>
+
+            </div>
+
+            <div class="rank-card">
+
+                <div class="rank-top">
+
+                    <div class="rank-icon">
+                        <i class="fa-solid fa-crosshairs"></i>
+                    </div>
+
+                    <h3>CLASH SQUAD</h3>
+
+                </div>
+
+                <div class="rank-level">HEROIC</div>
+
+                <span class="rank-season">
+                    CS Ranked | Season 1
+                </span>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- GAME ACTIONS -->
+
+    <section class="game-actions">
+
+        <h3>
+            <i class="fa-solid fa-gamepad"></i>
+            DARKALPHA10
+        </h3>
+
+        <p>
+            Free Fire Gaming Identity
+            <br>
+            Thanks for visiting my player profile.
+        </p>
+
+        <div class="action-buttons">
+
+            <a
+                href="https://play.google.com/store/apps/details?id=com.dts.freefireth"
+                target="_blank"
+                rel="noopener"
+                class="action-btn primary"
+            >
+                <i class="fa-solid fa-play"></i>
+                OPEN FREE FIRE
+            </a>
+
+            <a href="#player" class="action-btn secondary">
+                <i class="fa-solid fa-user"></i>
+                MY GAME PROFILE
+            </a>
+
+        </div>
+
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+
+<footer class="container">
+
+    <div>
+        © 2026 <span>DARKALPHA10</span>
+    </div>
+
+    <div>
+        FREE FIRE GAMING PROFILE
+    </div>
+
+</footer>
+
+<!-- COPY UID -->
+
+<script>
+const copyButton = document.getElementById("copyUID");
+const playerUID = document.getElementById("playerUID");
+
+copyButton.addEventListener("click", async function () {
+
+    const uid = playerUID.textContent.trim();
+    const originalHTML = copyButton.innerHTML;
+
+    try {
+
+        if (navigator.clipboard && window.isSecureContext) {
+
+            await navigator.clipboard.writeText(uid);
+
+        } else {
+
+            const textarea = document.createElement("textarea");
+
+            textarea.value = uid;
+            textarea.style.position = "fixed";
+            textarea.style.opacity = "0";
+
+            document.body.appendChild(textarea);
+
+            textarea.select();
+
+            const copied = document.execCommand("copy");
+
+            textarea.remove();
+
+            if (!copied) {
+                throw new Error("Copy failed");
+            }
+
+        }
+
+        copyButton.innerHTML =
+            '<i class="fa-solid fa-check"></i> COPIED';
+
+        copyButton.style.borderColor = "#35a56b";
+
+    } catch (error) {
+
+        copyButton.innerHTML =
+            '<i class="fa-solid fa-xmark"></i> FAILED';
+
+    }
+
+    setTimeout(function () {
+
+        copyButton.innerHTML = originalHTML;
+        copyButton.style.borderColor = "";
+
+    }, 1800);
+
+});
+</script>
+
+</body>
+</html>
