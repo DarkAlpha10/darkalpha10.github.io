@@ -272,9 +272,9 @@ h1 span {
 
 .social:hover {
     transform: translateY(-5px);
-    border-color: var(--red);
-    background: #211010;
-    box-shadow: 0 8px 25px #ed252d17;
+    border-color: var(--brand);
+    background: linear-gradient(145deg, var(--glow), #101010);
+    box-shadow: 0 8px 25px var(--glow);
 }
 
 .social:active {
@@ -286,21 +286,76 @@ h1 span {
     height: 45px;
     display: grid;
     place-items: center;
-    color: white;
-    background: #252020;
+    color: var(--brand);
+    background: var(--icon-bg);
+    border: 1px solid var(--icon-border);
     border-radius: 13px;
     transition: .3s;
 }
 
-.social:hover .social-icon {
-    background: #351313;
-    color: var(--red);
+.social-icon i {
+    font-size: 24px;
 }
 
 .social-icon svg {
     width: 24px;
     height: 24px;
     fill: currentColor;
+}
+
+.social:hover .social-icon {
+    background: var(--brand);
+    color: white;
+    box-shadow: 0 0 20px var(--glow);
+    transform: scale(1.08);
+}
+
+/* INDIVIDUAL BRAND COLORS */
+
+.whatsapp {
+    --brand: #25D366;
+    --glow: #25d36622;
+    --icon-bg: #25d36615;
+    --icon-border: #25d36644;
+}
+
+.telegram {
+    --brand: #2AABEE;
+    --glow: #2aabee22;
+    --icon-bg: #2aabee15;
+    --icon-border: #2aabee44;
+}
+
+.youtube {
+    --brand: #FF0033;
+    --glow: #ff003322;
+    --icon-bg: #ff003315;
+    --icon-border: #ff003344;
+}
+
+.facebook {
+    --brand: #1877F2;
+    --glow: #1877f222;
+    --icon-bg: #1877f215;
+    --icon-border: #1877f244;
+}
+
+.imo {
+    --brand: #37B8FF;
+    --glow: #7058ff22;
+    --icon-bg: #7058ff18;
+    --icon-border: #7058ff55;
+}
+
+.tiktok {
+    --brand: #25F4EE;
+    --glow: #25f4ee22;
+    --icon-bg: #25f4ee12;
+    --icon-border: #25f4ee44;
+}
+
+.tiktok .social-icon i {
+    filter: drop-shadow(2px 1px 0 #fe2c55);
 }
 
 .social-info {
@@ -566,7 +621,6 @@ footer span {
             </a>
 
         </nav>
-
     </div>
 </header>
 
@@ -618,12 +672,13 @@ footer span {
 
             <!-- WHATSAPP -->
 
-            <a class="social" href="#" target="_blank" rel="noopener">
+            <a class="social whatsapp"
+               href="#"
+               target="_blank"
+               rel="noopener">
 
                 <div class="social-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M12.04 2A9.91 9.91 0 0 0 3.6 17.1L2 22l5.06-1.58A10 10 0 1 0 12.04 2Zm0 18.2a8.18 8.18 0 0 1-4.17-1.14l-.3-.18-3 .94.97-2.92-.2-.31A8.17 8.17 0 1 1 12.04 20.2Zm4.49-6.12c-.25-.13-1.49-.73-1.72-.81-.23-.08-.4-.13-.56.13-.17.25-.65.81-.8.98-.14.17-.29.19-.54.06-.25-.12-1.06-.39-2.02-1.23-.75-.66-1.25-1.48-1.4-1.73-.14-.25-.02-.38.11-.51.11-.11.25-.29.37-.43.12-.15.16-.25.25-.42.08-.17.04-.31-.02-.43-.07-.13-.57-1.38-.78-1.89-.2-.5-.41-.43-.56-.44h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.08s.89 2.41 1.02 2.58c.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.4.52.59.19 1.13.16 1.56.1.48-.07 1.49-.61 1.7-1.19.21-.59.21-1.09.15-1.19-.07-.1-.23-.16-.48-.28Z"/>
-                    </svg>
+                    <i class="fa-brands fa-whatsapp"></i>
                 </div>
 
                 <div class="social-info">
@@ -635,12 +690,13 @@ footer span {
 
             <!-- TELEGRAM -->
 
-            <a class="social" href="https://t.me/DarkAlpha10" target="_blank" rel="noopener">
+            <a class="social telegram"
+               href="https://t.me/DarkAlpha10"
+               target="_blank"
+               rel="noopener">
 
                 <div class="social-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M21.8 3.3a1.1 1.1 0 0 0-1.16-.17L2.5 10.3c-1.12.44-1.1 1.07-.2 1.35l4.65 1.45 1.78 5.55c.22.61.12.85.75.85.49 0 .7-.22.97-.49l2.25-2.19 4.68 3.45c.86.48 1.48.23 1.69-.8l3.08-14.53c.3-1.25-.47-1.82-1.35-1.41ZM8.08 12.77l10.16-6.4c.5-.31.96-.14.58.2l-8.43 7.61-.33 3.52-1.98-4.93Z"/>
-                    </svg>
+                    <i class="fa-brands fa-telegram"></i>
                 </div>
 
                 <div class="social-info">
@@ -652,12 +708,13 @@ footer span {
 
             <!-- YOUTUBE -->
 
-            <a class="social" href="https://www.youtube.com/@PeaceWithQuran-f6o" target="_blank" rel="noopener">
+            <a class="social youtube"
+               href="https://www.youtube.com/@PeaceWithQuran-f6o"
+               target="_blank"
+               rel="noopener">
 
                 <div class="social-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M23.5 6.2a3 3 0 0 0-2.1-2.12C19.55 3.56 12 3.56 12 3.56s-7.55 0-9.4.52A3 3 0 0 0 .5 6.2 31.2 31.2 0 0 0 0 12a31.2 31.2 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.12c1.85.52 9.4.52 9.4.52s7.55 0 9.4-.52a3 3 0 0 0 2.1-2.12A31.2 31.2 0 0 0 24 12a31.2 31.2 0 0 0-.5-5.8ZM9.55 15.7V8.3L15.82 12l-6.27 3.7Z"/>
-                    </svg>
+                    <i class="fa-brands fa-youtube"></i>
                 </div>
 
                 <div class="social-info">
@@ -669,12 +726,13 @@ footer span {
 
             <!-- FACEBOOK -->
 
-            <a class="social" href="https://www.facebook.com/profile.php?id=61594039526261" target="_blank" rel="noopener">
+            <a class="social facebook"
+               href="https://www.facebook.com/profile.php?id=61594039526261"
+               target="_blank"
+               rel="noopener">
 
                 <div class="social-icon">
-                    <svg viewBox="0 0 24 24">
-                        <path d="M24 12a12 12 0 1 0-13.88 11.86v-8.39H7.08V12h3.04V9.35c0-3 1.79-4.66 4.53-4.66 1.31 0 2.68.23 2.68.23v2.95h-1.51c-1.49 0-1.96.92-1.96 1.87V12h3.33l-.53 3.47h-2.8v8.39A12 12 0 0 0 24 12Z"/>
-                    </svg>
+                    <i class="fa-brands fa-facebook"></i>
                 </div>
 
                 <div class="social-info">
@@ -684,10 +742,46 @@ footer span {
 
             </a>
 
+            <!-- IMO -->
+
+            <a class="social imo"
+               href="https://imo.im/m10_goat"
+               target="_blank"
+               rel="noopener">
+
+                <div class="social-icon">
+                    <i class="fa-solid fa-comment-dots"></i>
+                </div>
+
+                <div class="social-info">
+                    <strong>imo</strong>
+                    <small>m10_goat</small>
+                </div>
+
+            </a>
+
+            <!-- TIKTOK -->
+
+            <a class="social tiktok"
+               href="https://www.tiktok.com/@hameed.amiri73"
+               target="_blank"
+               rel="noopener">
+
+                <div class="social-icon">
+                    <i class="fa-brands fa-tiktok"></i>
+                </div>
+
+                <div class="social-info">
+                    <strong>TikTok</strong>
+                    <small>@hameed.amiri73</small>
+                </div>
+
+            </a>
+
         </div>
     </section>
 
-    <!-- FREE FIRE - CLICKABLE -->
+    <!-- FREE FIRE -->
 
     <a href="game-profile.html" class="gaming">
 
