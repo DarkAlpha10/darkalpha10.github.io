@@ -8,7 +8,6 @@
 <title>LaLiga Central | DarkAlpha10</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
@@ -23,6 +22,7 @@
     --red:#ed2939;
     --green:#31c58b;
     --gold:#e5bb70;
+    --font-scale:1;
 }
 
 * {
@@ -35,22 +35,23 @@ body {
     background:var(--bg);
     color:var(--text);
     font-family:Inter,Arial,sans-serif;
+    font-size:calc(14px * var(--font-scale));
 }
 
-button {
+button,input,select {
     font:inherit;
 }
 
+button {
+    cursor:pointer;
+}
+
 a {
-    color:inherit;
     text-decoration:none;
+    color:inherit;
 }
 
-/* MAIN LAYOUT */
-
-.app {
-    min-height:100vh;
-}
+/* LAYOUT */
 
 .sidebar {
     width:235px;
@@ -99,7 +100,6 @@ a {
     text-align:left;
     padding:12px;
     border-radius:8px;
-    cursor:pointer;
     display:flex;
     align-items:center;
     gap:13px;
@@ -134,7 +134,7 @@ a {
     line-height:1.8;
 }
 
-/* MAIN CONTENT */
+/* MAIN */
 
 .main {
     margin-left:235px;
@@ -187,26 +187,20 @@ a {
     padding:30px 35px 60px;
 }
 
-/* LEAGUE HERO */
+/* BANNER */
 
 .league-banner {
     min-height:190px;
     border:1px solid var(--border);
     border-radius:13px;
     overflow:hidden;
-    position:relative;
     background:
-        linear-gradient(90deg,rgba(16,20,28,.98),rgba(16,20,28,.72)),
-        url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=85") center/cover;
+    linear-gradient(90deg,rgba(16,20,28,.98),rgba(16,20,28,.72)),
+    url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=85") center/cover;
     display:flex;
     align-items:center;
     padding:30px;
     margin-bottom:25px;
-}
-
-.banner-content {
-    position:relative;
-    z-index:2;
 }
 
 .banner-kicker {
@@ -239,7 +233,7 @@ a {
     font-weight:700;
 }
 
-/* PAGE VIEWS */
+/* PAGES */
 
 .page-view {
     display:none;
@@ -251,8 +245,8 @@ a {
 }
 
 @keyframes fadeIn {
-    from {opacity:0; transform:translateY(5px);}
-    to {opacity:1; transform:translateY(0);}
+    from {opacity:0;transform:translateY(5px)}
+    to {opacity:1;transform:translateY(0)}
 }
 
 .page-heading {
@@ -266,7 +260,6 @@ a {
 .page-heading h2 {
     font-size:20px;
     font-weight:900;
-    letter-spacing:-.5px;
 }
 
 .page-heading p {
@@ -318,8 +311,6 @@ a {
     padding:18px;
 }
 
-/* GRID */
-
 .dashboard-grid {
     display:grid;
     grid-template-columns:minmax(0,1fr) 310px;
@@ -358,8 +349,6 @@ a {
     font-size:9px;
 }
 
-/* MATCHES */
-
 .match-widget {
     padding:14px;
     min-height:180px;
@@ -371,8 +360,6 @@ a {
     padding:0 15px 14px;
 }
 
-/* TABLE */
-
 .table-widget {
     padding:12px;
     min-height:300px;
@@ -382,7 +369,7 @@ a {
 
 .club-grid {
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(4,minmax(0,1fr));
     gap:13px;
 }
 
@@ -390,10 +377,14 @@ a {
     background:var(--panel);
     border:1px solid var(--border);
     border-radius:10px;
-    min-height:130px;
+    min-height:145px;
     padding:18px 10px;
     text-align:center;
     transition:.2s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
 }
 
 .club:hover {
@@ -411,6 +402,7 @@ a {
 .club h3 {
     font-size:11px;
     font-weight:800;
+    line-height:1.5;
 }
 
 .club p {
@@ -489,21 +481,146 @@ a {
     color:var(--muted);
 }
 
-/* BUTTONS */
+/* SETTINGS */
 
-.action-link {
-    display:inline-block;
-    padding:9px 13px;
-    background:var(--panel2);
-    border:1px solid var(--border);
-    border-radius:6px;
-    font-size:10px;
-    font-weight:700;
-    color:white;
+.settings-group {
+    margin-bottom:18px;
 }
 
-.action-link:hover {
+.settings-group-title {
+    color:var(--muted);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:1.3px;
+    padding:15px 0 10px;
+}
+
+.setting-row {
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:15px;
+    padding:16px 0;
+    border-bottom:1px solid var(--border);
+}
+
+.setting-row:last-child {
+    border-bottom:0;
+}
+
+.setting-info strong {
+    display:block;
+    font-size:12px;
+}
+
+.setting-info p {
+    color:var(--muted);
+    font-size:10px;
+    margin-top:5px;
+    line-height:1.6;
+}
+
+.setting-select {
+    background:var(--panel2);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:9px 11px;
+    outline:none;
+    max-width:145px;
+    font-size:11px;
+}
+
+.toggle {
+    width:43px;
+    height:24px;
+    border:0;
+    border-radius:30px;
+    background:#414b5a;
+    position:relative;
+    flex-shrink:0;
+    transition:.2s;
+}
+
+.toggle::after {
+    content:"";
+    width:18px;
+    height:18px;
+    position:absolute;
+    left:3px;
+    top:3px;
+    border-radius:50%;
+    background:white;
+    transition:.2s;
+}
+
+.toggle.on {
+    background:var(--red);
+}
+
+.toggle.on::after {
+    left:22px;
+}
+
+.settings-action {
+    background:var(--panel2);
+    color:white;
+    border:1px solid var(--border);
+    border-radius:7px;
+    padding:10px 14px;
+    font-size:10px;
+    font-weight:800;
+}
+
+.settings-action:hover {
     border-color:var(--red);
+}
+
+.settings-status {
+    color:var(--green);
+    font-size:10px;
+    margin-top:12px;
+}
+
+/* DESKTOP MODE */
+
+body.desktop-mode .main {
+    min-width:1050px;
+}
+
+body.desktop-mode .content {
+    max-width:none;
+    width:1200px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+body.desktop-mode .dashboard-grid {
+    grid-template-columns:minmax(0,1fr) 310px;
+}
+
+body.desktop-mode .club-grid {
+    grid-template-columns:repeat(4,minmax(0,1fr));
+}
+
+body.desktop-mode .news-grid {
+    grid-template-columns:repeat(3,1fr);
+}
+
+/* COMPACT */
+
+body.compact-mode .card-header {
+    padding:11px 15px;
+}
+
+body.compact-mode .club {
+    min-height:115px;
+    padding:12px 8px;
+}
+
+body.hide-images .club img,
+body.hide-images .news-card img {
+    display:none;
 }
 
 /* FOOTER */
@@ -520,11 +637,7 @@ footer strong {
     color:var(--red);
 }
 
-/* MOBILE */
-
-.mobile-header {
-    display:none;
-}
+/* RESPONSIVE */
 
 @media(max-width:1050px) {
     .dashboard-grid {
@@ -537,7 +650,11 @@ footer strong {
 }
 
 @media(max-width:760px) {
-    .sidebar {
+    body.desktop-mode {
+        overflow-x:auto;
+    }
+
+    body:not(.desktop-mode) .sidebar {
         width:100%;
         height:auto;
         position:fixed;
@@ -551,19 +668,19 @@ footer strong {
         background:#151a23;
     }
 
-    .brand,
-    .side-label,
-    .side-bottom {
+    body:not(.desktop-mode) .brand,
+    body:not(.desktop-mode) .side-label,
+    body:not(.desktop-mode) .side-bottom {
         display:none;
     }
 
-    .nav-list {
+    body:not(.desktop-mode) .nav-list {
         flex-direction:row;
         justify-content:space-around;
         gap:2px;
     }
 
-    .nav-link {
+    body:not(.desktop-mode) .nav-link {
         flex:1;
         min-width:0;
         padding:9px 2px;
@@ -572,75 +689,72 @@ footer strong {
         gap:4px;
         text-align:center;
         font-size:8px;
-        border-radius:7px;
     }
 
-    .nav-link.active {
+    body:not(.desktop-mode) .nav-link.active {
         box-shadow:inset 0 2px var(--red);
     }
 
-    .nav-icon {
+    body:not(.desktop-mode) .nav-icon {
         font-size:17px;
     }
 
-    .main {
+    body:not(.desktop-mode) .main {
         margin-left:0;
         padding-bottom:80px;
+        min-width:0;
     }
 
-    .topbar {
+    body:not(.desktop-mode) .topbar {
         height:58px;
         padding:0 17px;
     }
 
-    .content {
+    body:not(.desktop-mode) .content {
+        width:100%;
         padding:18px 14px 35px;
     }
 
-    .league-banner {
+    body:not(.desktop-mode) .league-banner {
         min-height:165px;
         padding:22px;
     }
 
-    .banner-content h1 {
+    body:not(.desktop-mode) .banner-content h1 {
         font-size:29px;
     }
 
-    .stats-grid {
+    body:not(.desktop-mode) .stats-grid {
         gap:8px;
     }
 
-    .stat-card {
+    body:not(.desktop-mode) .stat-card {
         padding:12px 10px;
     }
 
-    .stat-card strong {
+    body:not(.desktop-mode) .stat-card strong {
         font-size:17px;
     }
 
-    .club-grid {
-        grid-template-columns:repeat(2,1fr);
+    body:not(.desktop-mode) .club-grid {
+        grid-template-columns:repeat(2,minmax(0,1fr));
     }
 
-    .news-grid {
+    body:not(.desktop-mode) .news-grid {
         grid-template-columns:1fr;
     }
 
-    .page-heading h2 {
+    body:not(.desktop-mode) .page-heading h2 {
         font-size:17px;
     }
 }
 
 @media(max-width:390px) {
-    .nav-link {
+    body:not(.desktop-mode) .nav-link {
         font-size:7px;
     }
 
-    .nav-icon {
-        font-size:15px;
-    }
-
-    .stats-grid {
+    body:not(.desktop-mode) .stats-grid {
         grid-template-columns:1fr;
     }
 }
@@ -649,51 +763,42 @@ footer strong {
 
 <body>
 
-<div class="app">
-
-<!-- SIDEBAR NAVIGATION -->
-
 <aside class="sidebar">
-
     <div class="brand">DARKALPHA<span>10</span></div>
-
     <div class="side-label">FOOTBALL MENU</div>
 
     <nav class="nav-list">
 
         <button class="nav-link active" data-page="overview">
-            <span class="nav-icon">⌂</span>
-            Overview
+            <span class="nav-icon">⌂</span>Overview
         </button>
 
         <button class="nav-link" data-page="live">
-            <span class="nav-icon">◉</span>
-            Live
+            <span class="nav-icon">◉</span>Live
         </button>
 
         <button class="nav-link" data-page="fixtures">
-            <span class="nav-icon">▦</span>
-            Fixtures
+            <span class="nav-icon">▦</span>Fixtures
         </button>
 
         <button class="nav-link" data-page="results">
-            <span class="nav-icon">◷</span>
-            Results
+            <span class="nav-icon">◷</span>Results
         </button>
 
         <button class="nav-link" data-page="standings">
-            <span class="nav-icon">☷</span>
-            Standings
+            <span class="nav-icon">☷</span>Standings
         </button>
 
         <button class="nav-link" data-page="clubs">
-            <span class="nav-icon">♧</span>
-            Clubs
+            <span class="nav-icon">♧</span>Clubs
         </button>
 
         <button class="nav-link" data-page="news">
-            <span class="nav-icon">▤</span>
-            News
+            <span class="nav-icon">▤</span>News
+        </button>
+
+        <button class="nav-link" data-page="settings">
+            <span class="nav-icon">⚙</span>Settings
         </button>
 
     </nav>
@@ -702,10 +807,7 @@ footer strong {
         LaLiga Football Center<br>
         Powered by DarkAlpha10
     </div>
-
 </aside>
-
-<!-- MAIN -->
 
 <main class="main">
 
@@ -714,15 +816,10 @@ footer strong {
             <div class="topbar-title" id="topTitle">Overview</div>
             <span class="topbar-tag">LALIGA</span>
         </div>
-
-        <div class="topbar-right">
-            Spain · 2026/27
-        </div>
+        <div class="topbar-right">Spain · 2026/27</div>
     </header>
 
     <div class="content">
-
-        <!-- LEAGUE BANNER -->
 
         <div class="league-banner">
             <div class="banner-content">
@@ -751,13 +848,11 @@ footer strong {
                     <strong>LaLiga</strong>
                     <small>Spain</small>
                 </div>
-
                 <div class="stat-card">
                     <span>CLUBS</span>
                     <strong>20</strong>
                     <small>Participating teams</small>
                 </div>
-
                 <div class="stat-card">
                     <span>SEASON</span>
                     <strong>26/27</strong>
@@ -766,91 +861,43 @@ footer strong {
             </div>
 
             <div class="dashboard-grid">
+                <div class="card">
+                    <div class="card-header">
+                        <h3>Today's Matches</h3>
+                        <small>LaLiga Match Center</small>
+                    </div>
+                    <div class="match-widget">
+                        <div class="rotascore-widget"
+                             data-type="matches"
+                             data-leagues="vl7oqdehlyr510j"
+                             data-locale="en">
+                        </div>
+                    </div>
+                    <div class="widget-note">Match data provided by Rotascore.</div>
+                </div>
 
                 <div>
                     <div class="card">
-                        <div class="card-header">
-                            <h3>Today's Matches</h3>
-                            <small>LaLiga Match Center</small>
-                        </div>
-
-                        <div class="match-widget">
-                            <div class="rotascore-widget"
-                                 data-type="matches"
-                                 data-leagues="vl7oqdehlyr510j"
-                                 data-locale="en">
-                                <noscript>
-                                    <a href="https://www.rotascore.com/en/league/la-liga/vl7oqdehlyr510j">
-                                        LaLiga matches
-                                    </a>
-                                </noscript>
-                            </div>
-                        </div>
-
-                        <div class="widget-note">
-                            Match data provided by Rotascore.
+                        <div class="card-header"><h3>Competition Details</h3></div>
+                        <div class="card-body info-list">
+                            <div class="info-item"><span>Country</span><strong>Spain</strong></div>
+                            <div class="info-item"><span>League</span><strong>LaLiga</strong></div>
+                            <div class="info-item"><span>Teams</span><strong>20</strong></div>
+                            <div class="info-item"><span>Season</span><strong>2026/27</strong></div>
                         </div>
                     </div>
                 </div>
-
-                <aside>
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Competition Details</h3>
-                        </div>
-
-                        <div class="card-body info-list">
-                            <div class="info-item">
-                                <span>Country</span>
-                                <strong>Spain</strong>
-                            </div>
-                            <div class="info-item">
-                                <span>League</span>
-                                <strong>LaLiga</strong>
-                            </div>
-                            <div class="info-item">
-                                <span>Teams</span>
-                                <strong>20</strong>
-                            </div>
-                            <div class="info-item">
-                                <span>Season</span>
-                                <strong>2026/27</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header">
-                            <h3>Official League</h3>
-                        </div>
-                        <div class="card-body">
-                            <p style="font-size:11px;color:var(--muted);line-height:1.8">
-                                Follow the Spanish first division,
-                                its clubs and the race for the title.
-                            </p>
-                            <a class="action-link"
-                               href="https://www.laliga.com/en-GB"
-                               target="_blank"
-                               rel="noopener"
-                               style="margin-top:14px">
-                                LaLiga Website ↗
-                            </a>
-                        </div>
-                    </div>
-                </aside>
-
             </div>
         </section>
 
         <!-- LIVE -->
 
         <section class="page-view" id="page-live">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">LIVE FOOTBALL</div>
                     <h2>Live Scores</h2>
-                    <p>Follow today's LaLiga matches and live score updates.</p>
+                    <p>Follow LaLiga matches and score updates.</p>
                 </div>
             </div>
 
@@ -859,7 +906,6 @@ footer strong {
                     <h3>LaLiga Live Center</h3>
                     <small>Live scores and match times</small>
                 </div>
-
                 <div class="match-widget">
                     <div class="rotascore-widget"
                          data-type="matches"
@@ -867,18 +913,12 @@ footer strong {
                          data-locale="en">
                     </div>
                 </div>
-
-                <div class="widget-note">
-                    Scores and match events are supplied by Rotascore.
-                </div>
             </div>
-
         </section>
 
         <!-- FIXTURES -->
 
         <section class="page-view" id="page-fixtures">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">MATCH SCHEDULE</div>
@@ -886,13 +926,11 @@ footer strong {
                     <p>LaLiga match schedule and kickoff information.</p>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header">
                     <h3>LaLiga Matches</h3>
                     <small>Match schedule</small>
                 </div>
-
                 <div class="match-widget">
                     <div class="rotascore-widget"
                          data-type="matches"
@@ -900,18 +938,12 @@ footer strong {
                          data-locale="en">
                     </div>
                 </div>
-
-                <div class="widget-note">
-                    The provider controls the displayed match dates.
-                </div>
             </div>
-
         </section>
 
         <!-- RESULTS -->
 
         <section class="page-view" id="page-results">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">COMPLETED MATCHES</div>
@@ -919,49 +951,37 @@ footer strong {
                     <p>LaLiga match scores and results.</p>
                 </div>
             </div>
-
             <div class="card">
-                <div class="card-header">
-                    <h3>Match Results</h3>
-                    <small>LaLiga</small>
-                </div>
-
+                <div class="card-header"><h3>Match Results</h3></div>
                 <div class="card-body">
-                    <p style="color:var(--muted);font-size:12px;line-height:1.8">
-                        Open the LaLiga match center to view completed
-                        matches, scores and match details.
+                    <p style="font-size:12px;color:var(--muted);line-height:1.8">
+                        View completed matches, scores and match details.
                     </p>
-
-                    <a class="action-link"
+                    <a class="settings-action"
                        href="https://www.rotascore.com/en/league/la-liga/vl7oqdehlyr510j"
-                       target="_blank"
-                       rel="noopener"
-                       style="margin-top:15px">
-                        View LaLiga Results ↗
+                       target="_blank" rel="noopener"
+                       style="display:inline-block;margin-top:15px">
+                        View Results ↗
                     </a>
                 </div>
             </div>
-
         </section>
 
         <!-- STANDINGS -->
 
         <section class="page-view" id="page-standings">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">LEAGUE RANKING</div>
                     <h2>League Standings</h2>
-                    <p>Position, matches, goal difference and points.</p>
+                    <p>Team positions, matches, goal difference and points.</p>
                 </div>
             </div>
-
             <div class="card">
                 <div class="card-header">
                     <h3>LaLiga Table</h3>
                     <small>2026/27</small>
                 </div>
-
                 <div class="table-widget">
                     <div class="rotascore-widget"
                          data-type="standings"
@@ -969,23 +989,17 @@ footer strong {
                          data-locale="en">
                     </div>
                 </div>
-
-                <div class="widget-note">
-                    Current standings supplied by Rotascore.
-                </div>
             </div>
-
         </section>
 
         <!-- CLUBS -->
 
         <section class="page-view" id="page-clubs">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">TEAMS</div>
                     <h2>LaLiga Clubs</h2>
-                    <p>Some of the clubs competing in Spanish football.</p>
+                    <p>Full club names and team badges.</p>
                 </div>
             </div>
 
@@ -999,13 +1013,13 @@ footer strong {
 
                 <div class="club">
                     <img src="https://crests.football-data.org/86.png" alt="Real Madrid">
-                    <h3>Real Madrid</h3>
+                    <h3>Real Madrid CF</h3>
                     <p>Madrid</p>
                 </div>
 
                 <div class="club">
                     <img src="https://crests.football-data.org/78.png" alt="Atletico Madrid">
-                    <h3>Atletico Madrid</h3>
+                    <h3>Club Atlético de Madrid</h3>
                     <p>Madrid</p>
                 </div>
 
@@ -1029,7 +1043,7 @@ footer strong {
 
                 <div class="club">
                     <img src="https://crests.football-data.org/92.png" alt="Real Sociedad">
-                    <h3>Real Sociedad</h3>
+                    <h3>Real Sociedad de Fútbol</h3>
                     <p>San Sebastian</p>
                 </div>
 
@@ -1040,13 +1054,11 @@ footer strong {
                 </div>
 
             </div>
-
         </section>
 
         <!-- NEWS -->
 
         <section class="page-view" id="page-news">
-
             <div class="page-heading">
                 <div>
                     <div class="section-kicker">LATEST STORIES</div>
@@ -1056,7 +1068,6 @@ footer strong {
             </div>
 
             <div class="news-grid">
-
                 <article class="news-card">
                     <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=85" alt="Football stadium">
                     <div class="news-card-content">
@@ -1080,18 +1091,140 @@ footer strong {
                     <div class="news-card-content">
                         <span>FOOTBALL</span>
                         <h3>Discover the clubs of Spanish football</h3>
-                        <p>Explore teams, stadiums and competition history.</p>
+                        <p>Explore teams and competition history.</p>
                     </div>
                 </article>
+            </div>
+        </section>
 
+        <!-- SETTINGS -->
+
+        <section class="page-view" id="page-settings">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">PERSONALIZATION</div>
+                    <h2>Settings</h2>
+                    <p>Customize your LaLiga experience.</p>
+                </div>
             </div>
 
-            <div class="card" style="margin-top:20px">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Appearance</h3>
+                    <small>Display preferences</small>
+                </div>
+
                 <div class="card-body">
-                    <p style="font-size:11px;color:var(--muted);line-height:1.8">
-                        News cards are sample editorial content.
-                        They are not automatically updated news articles.
-                    </p>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">LAYOUT</div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Desktop Site</strong>
+                                <p>Use the desktop layout even on a mobile screen.</p>
+                            </div>
+                            <button class="toggle" id="desktopToggle"
+                                role="switch" aria-checked="false"
+                                aria-label="Desktop Site"></button>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Compact Mode</strong>
+                                <p>Reduce spacing and make content more compact.</p>
+                            </div>
+                            <button class="toggle" id="compactToggle"
+                                role="switch" aria-checked="false"
+                                aria-label="Compact Mode"></button>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">CONTENT</div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Team Badges</strong>
+                                <p>Show or hide team logos and images.</p>
+                            </div>
+                            <button class="toggle on" id="imagesToggle"
+                                role="switch" aria-checked="true"
+                                aria-label="Team Badges"></button>
+                        </div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Text Size</strong>
+                                <p>Adjust the overall text size.</p>
+                            </div>
+                            <select class="setting-select" id="fontSize">
+                                <option value="0.9">Small</option>
+                                <option value="1" selected>Normal</option>
+                                <option value="1.1">Large</option>
+                                <option value="1.2">Extra Large</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">PREFERENCES</div>
+
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Default Page</strong>
+                                <p>Choose which page opens when you visit the site.</p>
+                            </div>
+                            <select class="setting-select" id="defaultPage">
+                                <option value="overview">Overview</option>
+                                <option value="live">Live</option>
+                                <option value="fixtures">Fixtures</option>
+                                <option value="results">Results</option>
+                                <option value="standings">Standings</option>
+                                <option value="clubs">Clubs</option>
+                                <option value="news">News</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="settings-group">
+                        <div class="settings-group-title">RESET</div>
+                        <div class="setting-row">
+                            <div class="setting-info">
+                                <strong>Reset Settings</strong>
+                                <p>Restore all preferences to their defaults.</p>
+                            </div>
+                            <button class="settings-action" id="resetSettings">
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="settings-status" id="settingsStatus">
+                        Your preferences are saved in this browser.
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>About This Website</h3>
+                </div>
+                <div class="card-body info-list">
+                    <div class="info-item">
+                        <span>Website</span>
+                        <strong>DarkAlpha10 Football</strong>
+                    </div>
+                    <div class="info-item">
+                        <span>Competition</span>
+                        <strong>LaLiga</strong>
+                    </div>
+                    <div class="info-item">
+                        <span>Version</span>
+                        <strong>2.0</strong>
+                    </div>
                 </div>
             </div>
 
@@ -1104,26 +1237,30 @@ footer strong {
     </footer>
 
 </main>
-</div>
 
 <script async src="https://www.rotascore.com/embed/v1.js"></script>
 
 <script>
+/* NAVIGATION */
+
 const navLinks = document.querySelectorAll(".nav-link");
 const pages = document.querySelectorAll(".page-view");
 const topTitle = document.getElementById("topTitle");
 
 const pageNames = {
-    overview: "Overview",
-    live: "Live Scores",
-    fixtures: "Fixtures",
-    results: "Results",
-    standings: "Standings",
-    clubs: "Clubs",
-    news: "News"
+    overview:"Overview",
+    live:"Live Scores",
+    fixtures:"Fixtures",
+    results:"Results",
+    standings:"Standings",
+    clubs:"Clubs",
+    news:"News",
+    settings:"Settings"
 };
 
 function showPage(pageName) {
+    if (!pageNames[pageName]) pageName = "overview";
+
     pages.forEach(page => {
         page.classList.toggle(
             "active",
@@ -1138,12 +1275,9 @@ function showPage(pageName) {
         );
     });
 
-    topTitle.textContent = pageNames[pageName] || "Overview";
+    topTitle.textContent = pageNames[pageName];
 
-    window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-    });
+    window.scrollTo({top:0,behavior:"smooth"});
 }
 
 navLinks.forEach(link => {
@@ -1151,6 +1285,101 @@ navLinks.forEach(link => {
         showPage(link.dataset.page);
     });
 });
+
+/* SETTINGS */
+
+const defaults = {
+    desktop:false,
+    compact:false,
+    images:true,
+    font:"1",
+    defaultPage:"overview"
+};
+
+function loadSettings() {
+    try {
+        return {
+            ...defaults,
+            ...JSON.parse(localStorage.getItem("da10_laliga_settings") || "{}")
+        };
+    } catch {
+        return {...defaults};
+    }
+}
+
+let settings = loadSettings();
+
+function saveSettings() {
+    localStorage.setItem(
+        "da10_laliga_settings",
+        JSON.stringify(settings)
+    );
+
+    document.getElementById("settingsStatus").textContent =
+        "Settings saved successfully.";
+}
+
+function setToggle(id, value) {
+    const button = document.getElementById(id);
+    button.classList.toggle("on",value);
+    button.setAttribute("aria-checked",String(value));
+}
+
+function applySettings() {
+    document.body.classList.toggle("desktop-mode",settings.desktop);
+    document.body.classList.toggle("compact-mode",settings.compact);
+    document.body.classList.toggle("hide-images",!settings.images);
+
+    document.documentElement.style.setProperty(
+        "--font-scale",
+        settings.font
+    );
+
+    setToggle("desktopToggle",settings.desktop);
+    setToggle("compactToggle",settings.compact);
+    setToggle("imagesToggle",settings.images);
+
+    document.getElementById("fontSize").value = settings.font;
+    document.getElementById("defaultPage").value = settings.defaultPage;
+}
+
+function changeSetting(key,value) {
+    settings[key] = value;
+    applySettings();
+    saveSettings();
+}
+
+document.getElementById("desktopToggle").addEventListener("click",() => {
+    changeSetting("desktop",!settings.desktop);
+});
+
+document.getElementById("compactToggle").addEventListener("click",() => {
+    changeSetting("compact",!settings.compact);
+});
+
+document.getElementById("imagesToggle").addEventListener("click",() => {
+    changeSetting("images",!settings.images);
+});
+
+document.getElementById("fontSize").addEventListener("change",event => {
+    changeSetting("font",event.target.value);
+});
+
+document.getElementById("defaultPage").addEventListener("change",event => {
+    changeSetting("defaultPage",event.target.value);
+});
+
+document.getElementById("resetSettings").addEventListener("click",() => {
+    settings = {...defaults};
+    applySettings();
+    saveSettings();
+    showPage("overview");
+});
+
+/* INITIALIZE */
+
+applySettings();
+showPage(settings.defaultPage);
 </script>
 
 </body>
