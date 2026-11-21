@@ -5,1382 +5,1070 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#10141c">
-<title>LaLiga Central | DarkAlpha10</title>
+<title>DarkAlpha10 | LaLiga</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
-:root {
-    --bg:#10141c;
-    --sidebar:#151a23;
-    --panel:#1b222d;
-    --panel2:#222b38;
-    --border:#2b3543;
-    --text:#f4f6f9;
-    --muted:#929eae;
-    --red:#ed2939;
-    --green:#31c58b;
-    --gold:#e5bb70;
-    --font-scale:1;
+:root{
+  --bg:#0d1118;
+  --sidebar:#121822;
+  --panel:#171f2b;
+  --panel2:#1d2735;
+  --border:#293545;
+  --text:#f3f6fa;
+  --muted:#8997a9;
+  --red:#ed2939;
+  --green:#35c991;
+  --gold:#e7bd70;
+  --blue:#5599ff;
+  --radius:16px;
 }
-
-* {
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  font-family:Inter,Arial,sans-serif;
+  overflow-x:hidden;
 }
-
-body {
-    background:var(--bg);
-    color:var(--text);
-    font-family:Inter,Arial,sans-serif;
-    font-size:calc(14px * var(--font-scale));
+button,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.app{min-height:100vh}
+.sidebar{
+  position:fixed;
+  inset:0 auto 0 0;
+  width:245px;
+  padding:25px 17px;
+  background:var(--sidebar);
+  border-right:1px solid var(--border);
+  display:flex;
+  flex-direction:column;
+  z-index:50;
 }
-
-button,input,select {
-    font:inherit;
+.brand{
+  display:flex;
+  align-items:center;
+  gap:11px;
+  padding:5px 9px 30px;
 }
-
-button {
-    cursor:pointer;
+.brand-mark{
+  width:42px;height:42px;
+  display:grid;place-items:center;
+  border-radius:13px;
+  background:var(--red);
+  font-size:18px;font-weight:900;
+  box-shadow:0 5px 20px #ed293933;
 }
-
-a {
-    text-decoration:none;
-    color:inherit;
+.brand-name{font-size:17px;font-weight:900;letter-spacing:.3px}
+.brand-name span{color:var(--red)}
+.brand-sub{font-size:10px;color:var(--muted);margin-top:4px;letter-spacing:1.5px}
+.nav-label{
+  padding:13px 12px 9px;
+  color:#657286;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:1.5px;
 }
-
-/* LAYOUT */
-
-.sidebar {
-    width:235px;
-    height:100vh;
-    position:fixed;
-    top:0;
-    left:0;
-    background:var(--sidebar);
-    border-right:1px solid var(--border);
-    padding:25px 16px;
-    z-index:100;
+.nav-list{display:grid;gap:5px}
+.nav-btn{
+  width:100%;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  padding:12px 13px;
+  border:1px solid transparent;
+  background:transparent;
+  color:var(--muted);
+  border-radius:11px;
+  text-align:left;
+  font-size:13px;
+  font-weight:650;
+  transition:.2s;
+}
+.nav-btn svg{width:19px;height:19px;flex:none}
+.nav-btn:hover{background:var(--panel2);color:var(--text)}
+.nav-btn.active{
+  color:white;
+  background:#ed29391b;
+  border-color:#ed293944;
+}
+.nav-btn.active svg{color:var(--red)}
+.sidebar-bottom{margin-top:auto}
+.sidebar-note{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:13px;
+  color:var(--muted);
+  font-size:11px;
+  line-height:1.7;
+}
+.sidebar-note strong{color:var(--text)}
+.main{
+  margin-left:245px;
+  min-height:100vh;
+}
+.topbar{
+  height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 30px;
+  border-bottom:1px solid var(--border);
+  background:#0d1118ed;
+  position:sticky;
+  top:0;
+  z-index:30;
+  backdrop-filter:blur(16px);
+}
+.top-left{display:flex;align-items:center;gap:12px}
+.top-title{font-size:14px;font-weight:800}
+.top-tag{
+  font-size:10px;
+  color:var(--red);
+  background:#ed29391b;
+  padding:5px 8px;
+  border-radius:6px;
+  font-weight:800;
+}
+.top-right{display:flex;align-items:center;gap:12px}
+.season{font-size:11px;color:var(--muted)}
+.live-indicator{
+  display:flex;align-items:center;gap:7px;
+  font-size:11px;color:var(--green);font-weight:700;
+}
+.live-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);
+  box-shadow:0 0 10px var(--green);
+}
+.content{
+  max-width:1450px;
+  margin:auto;
+  padding:28px 30px 60px;
+}
+.page{display:none;animation:fade .22s ease}
+.page.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.page-heading{
+  display:flex;align-items:flex-end;
+  justify-content:space-between;
+  gap:15px;margin-bottom:24px;
+}
+.eyebrow{
+  color:var(--red);
+  font-size:10px;
+  letter-spacing:2px;
+  font-weight:900;
+  margin-bottom:9px;
+}
+h1{font-size:27px;margin:0;font-weight:900;letter-spacing:-.7px}
+.subtitle{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.6}
+.section-title{
+  font-size:15px;font-weight:850;
+  margin:27px 0 14px;
+  display:flex;align-items:center;gap:9px;
+}
+.section-title:before{
+  content:"";width:4px;height:17px;
+  border-radius:5px;background:var(--red);
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.hero{
+  min-height:220px;
+  padding:30px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  background:
+    radial-gradient(circle at 85% 50%,#ed293927,transparent 30%),
+    linear-gradient(115deg,#1b2431,#121923);
+}
+.hero h2{font-size:28px;margin:0 0 10px;font-weight:900}
+.hero p{font-size:12px;color:var(--muted);line-height:1.7;max-width:480px}
+.hero-mark{
+  font-size:75px;font-weight:900;
+  color:#ed293933;
+  letter-spacing:-7px;
+}
+.hero-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--red);color:white;
+  border:0;border-radius:9px;
+  padding:11px 16px;font-size:12px;font-weight:800;
+  margin-top:10px;
+}
+.stats{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:13px;margin-top:17px;
+}
+.stat{padding:17px}
+.stat-label{font-size:11px;color:var(--muted)}
+.stat-value{font-size:22px;font-weight:900;margin-top:9px}
+.stat-foot{font-size:10px;color:var(--muted);margin-top:5px}
+.stat-icon{
+  width:33px;height:33px;
+  display:grid;place-items:center;
+  border-radius:10px;
+  background:#ed29391b;color:var(--red);
+  margin-bottom:13px;
+}
+.stat-icon svg{width:17px;height:17px}
+.two-col{
+  display:grid;grid-template-columns:1.5fr 1fr;
+  gap:15px;margin-top:18px;
+}
+.panel-head{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:17px 18px;border-bottom:1px solid var(--border);
+}
+.panel-head strong{font-size:13px}
+.panel-head span{font-size:10px;color:var(--muted)}
+.panel-body{padding:17px}
+.quick-links{display:grid;gap:9px}
+.quick-link{
+  display:flex;align-items:center;gap:12px;
+  background:var(--panel2);border:1px solid var(--border);
+  border-radius:11px;padding:13px;
+  color:var(--text);font-size:12px;font-weight:700;
+}
+.quick-link svg{width:19px;height:19px;color:var(--red)}
+.quick-link .arrow{margin-left:auto;color:var(--muted)}
+.day-tabs{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin:18px 0;
+}
+.day-btn{
+  border:1px solid var(--border);
+  background:var(--panel);
+  color:var(--muted);
+  padding:10px 16px;
+  border-radius:9px;
+  font-size:11px;font-weight:800;
+  transition:.2s;
+}
+.day-btn.active{
+  color:white;background:var(--red);
+  border-color:var(--red);
+}
+.date-label{
+  color:var(--muted);font-size:11px;
+  margin:0 0 13px;
+}
+.widget-wrap{
+  min-height:220px;
+  padding:12px;
+  background:var(--panel);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  overflow:hidden;
+}
+.widget-loading{
+  min-height:180px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;gap:12px;
+  color:var(--muted);font-size:12px;
+}
+.spinner{
+  width:25px;height:25px;
+  border:2px solid var(--border);
+  border-top-color:var(--red);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.widget-wrap .rotascore-widget{width:100%}
+.widget-wrap iframe{max-width:100%!important}
+.note{
+  font-size:10px;color:var(--muted);
+  margin-top:11px;line-height:1.7;
+}
+.club-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:12px;
+}
+.club-card{
+  padding:17px 12px;
+  display:flex;align-items:center;gap:12px;
+  min-width:0;transition:.2s;
+}
+.club-card:hover{transform:translateY(-2px);border-color:#ed293966}
+.club-card img{
+  width:38px;height:38px;object-fit:contain;
+  flex:none;
+}
+.club-name{font-size:11px;font-weight:800;line-height:1.5}
+.club-country{font-size:9px;color:var(--muted);margin-top:4px}
+.news-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px}
+.news-card{padding:18px}
+.news-tag{
+  display:inline-block;
+  color:var(--red);font-size:9px;font-weight:900;
+  letter-spacing:1px;margin-bottom:12px;
+}
+.news-card h3{font-size:14px;line-height:1.5;margin:0 0 9px}
+.news-card p{font-size:11px;line-height:1.7;color:var(--muted);margin:0}
+.news-date{font-size:9px;color:var(--muted);margin-top:15px}
+.settings-list{display:grid;gap:11px;max-width:750px}
+.setting{
+  padding:16px;
+  display:flex;align-items:center;
+  justify-content:space-between;gap:15px;
+}
+.setting-info strong{font-size:12px;display:block}
+.setting-info small{display:block;color:var(--muted);font-size:10px;margin-top:5px;line-height:1.5}
+.setting select{
+  background:var(--panel2);color:var(--text);
+  border:1px solid var(--border);
+  border-radius:8px;padding:9px;
+  font-size:11px;max-width:155px;
+}
+.switch{
+  width:43px;height:24px;border-radius:30px;
+  border:0;background:#394657;position:relative;flex:none;
+}
+.switch:after{
+  content:"";position:absolute;
+  width:18px;height:18px;border-radius:50%;
+  background:white;top:3px;left:3px;transition:.2s;
+}
+.switch.on{background:var(--red)}
+.switch.on:after{left:22px}
+.danger-btn{
+  padding:11px 15px;border-radius:9px;
+  border:1px solid #ed293955;
+  color:var(--red);background:#ed293911;
+  font-size:11px;font-weight:800;
+}
+.bottom-nav{display:none}
+.mobile-brand{display:none}
+.empty-info{
+  padding:25px;text-align:center;
+  color:var(--muted);font-size:12px;
+}
+body.compact .content{padding-top:17px}
+body.compact .stat{padding:12px}
+body.compact .club-card{padding:11px}
+body.large-text{font-size:110%}
+body.small-text{font-size:92%}
+body.desktop-mode .main{min-width:1050px}
+body.desktop-mode .content{max-width:1450px}
+body.desktop-mode .bottom-nav{display:none!important}
+body.desktop-mode .sidebar{display:flex!important}
+body.desktop-mode .main{margin-left:245px!important}
+@media(max-width:1050px){
+  .club-grid{grid-template-columns:repeat(3,1fr)}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:760px){
+  .sidebar{display:none}
+  .main{margin-left:0}
+  .topbar{height:60px;padding:0 17px}
+  .content{padding:22px 15px 105px}
+  .page-heading{align-items:flex-start}
+  h1{font-size:23px}
+  .hero{padding:22px;min-height:190px}
+  .hero h2{font-size:22px}
+  .hero-mark{font-size:48px}
+  .two-col{grid-template-columns:1fr}
+  .club-grid{grid-template-columns:repeat(2,1fr);gap:8px}
+  .news-grid{grid-template-columns:1fr}
+  .bottom-nav{
     display:flex;
-    flex-direction:column;
-}
-
-.brand {
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:-1px;
-    padding:0 12px 28px;
-}
-
-.brand span {
-    color:var(--red);
-}
-
-.side-label {
-    color:#687586;
-    font-size:10px;
-    font-weight:800;
-    letter-spacing:1.5px;
-    padding:12px;
-}
-
-.nav-list {
-    display:flex;
-    flex-direction:column;
-    gap:5px;
-}
-
-.nav-link {
-    width:100%;
-    border:0;
-    background:transparent;
-    color:var(--muted);
-    text-align:left;
-    padding:12px;
-    border-radius:8px;
-    display:flex;
-    align-items:center;
-    gap:13px;
-    font-size:12px;
-    font-weight:700;
-    transition:.2s;
-}
-
-.nav-link:hover {
-    background:var(--panel2);
-    color:white;
-}
-
-.nav-link.active {
-    color:white;
-    background:rgba(237,41,57,.13);
-    box-shadow:inset 3px 0 var(--red);
-}
-
-.nav-icon {
-    width:20px;
-    text-align:center;
-    font-size:16px;
-}
-
-.side-bottom {
-    margin-top:auto;
+    position:fixed;z-index:100;
+    left:0;right:0;bottom:0;
+    height:70px;
+    padding:7px 5px calc(7px + env(safe-area-inset-bottom));
+    background:#121822f5;
     border-top:1px solid var(--border);
-    padding:18px 10px 0;
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.8;
-}
-
-/* MAIN */
-
-.main {
-    margin-left:235px;
-    min-height:100vh;
-}
-
-.topbar {
-    height:68px;
-    background:rgba(21,26,35,.94);
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 35px;
-    position:sticky;
-    top:0;
-    z-index:50;
-    backdrop-filter:blur(15px);
-}
-
-.topbar-left {
-    display:flex;
-    align-items:center;
-    gap:12px;
-}
-
-.topbar-title {
-    font-size:13px;
-    font-weight:800;
-}
-
-.topbar-tag {
-    background:rgba(237,41,57,.13);
-    color:#ff6873;
-    border-radius:5px;
-    padding:5px 8px;
-    font-size:9px;
-    font-weight:800;
-}
-
-.topbar-right {
-    color:var(--muted);
-    font-size:11px;
-}
-
-.content {
-    width:100%;
-    max-width:1450px;
-    margin:auto;
-    padding:30px 35px 60px;
-}
-
-/* BANNER */
-
-.league-banner {
-    min-height:190px;
-    border:1px solid var(--border);
-    border-radius:13px;
-    overflow:hidden;
-    background:
-    linear-gradient(90deg,rgba(16,20,28,.98),rgba(16,20,28,.72)),
-    url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=85") center/cover;
-    display:flex;
-    align-items:center;
-    padding:30px;
-    margin-bottom:25px;
-}
-
-.banner-kicker {
-    color:var(--red);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:2px;
-}
-
-.banner-content h1 {
-    font-size:36px;
-    font-weight:900;
-    letter-spacing:-1.5px;
-    margin:8px 0;
-}
-
-.banner-content p {
-    color:#b0bac8;
-    font-size:12px;
-}
-
-.banner-season {
-    display:inline-block;
-    margin-top:15px;
-    padding:7px 11px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:6px;
-    font-size:10px;
-    font-weight:700;
-}
-
-/* PAGES */
-
-.page-view {
-    display:none;
-    animation:fadeIn .25s ease;
-}
-
-.page-view.active {
-    display:block;
-}
-
-@keyframes fadeIn {
-    from {opacity:0;transform:translateY(5px)}
-    to {opacity:1;transform:translateY(0)}
-}
-
-.page-heading {
-    display:flex;
-    justify-content:space-between;
-    align-items:end;
-    gap:15px;
-    margin-bottom:20px;
-}
-
-.page-heading h2 {
-    font-size:20px;
-    font-weight:900;
-}
-
-.page-heading p {
-    color:var(--muted);
-    font-size:11px;
-    margin-top:5px;
-}
-
-.section-kicker {
-    color:var(--red);
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:1.5px;
-    margin-bottom:5px;
-}
-
-/* CARDS */
-
-.card {
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:11px;
-    overflow:hidden;
-}
-
-.card + .card {
-    margin-top:18px;
-}
-
-.card-header {
-    padding:17px 19px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom:1px solid var(--border);
-}
-
-.card-header h3 {
-    font-size:13px;
-    font-weight:800;
-}
-
-.card-header small {
-    color:var(--muted);
-    font-size:10px;
-}
-
-.card-body {
-    padding:18px;
-}
-
-.dashboard-grid {
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 310px;
-    gap:18px;
-    align-items:start;
-}
-
-.stats-grid {
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:13px;
-    margin-bottom:20px;
-}
-
-.stat-card {
-    padding:17px;
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:10px;
-}
-
-.stat-card span {
-    color:var(--muted);
-    font-size:10px;
-    font-weight:700;
-}
-
-.stat-card strong {
-    display:block;
-    font-size:21px;
-    margin-top:7px;
-}
-
-.stat-card small {
-    color:var(--green);
-    font-size:9px;
-}
-
-.match-widget {
-    padding:14px;
-    min-height:180px;
-}
-
-.widget-note {
-    color:var(--muted);
-    font-size:10px;
-    padding:0 15px 14px;
-}
-
-.table-widget {
-    padding:12px;
-    min-height:300px;
-}
-
-/* CLUBS */
-
-.club-grid {
-    display:grid;
-    grid-template-columns:repeat(4,minmax(0,1fr));
-    gap:13px;
-}
-
-.club {
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:10px;
-    min-height:145px;
-    padding:18px 10px;
-    text-align:center;
-    transition:.2s;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-}
-
-.club:hover {
-    border-color:var(--red);
-    transform:translateY(-3px);
-}
-
-.club img {
-    width:48px;
-    height:48px;
-    object-fit:contain;
-    margin-bottom:10px;
-}
-
-.club h3 {
-    font-size:11px;
-    font-weight:800;
-    line-height:1.5;
-}
-
-.club p {
-    color:var(--muted);
-    font-size:9px;
-    margin-top:4px;
-}
-
-/* NEWS */
-
-.news-grid {
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:15px;
-}
-
-.news-card {
-    background:var(--panel);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-}
-
-.news-card img {
-    width:100%;
-    height:150px;
-    object-fit:cover;
-    display:block;
-}
-
-.news-card-content {
-    padding:15px;
-}
-
-.news-card-content span {
-    color:var(--red);
-    font-size:9px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.news-card-content h3 {
-    font-size:13px;
-    line-height:1.6;
-    margin-top:8px;
-}
-
-.news-card-content p {
-    color:var(--muted);
-    font-size:10px;
-    line-height:1.7;
-    margin-top:7px;
-}
-
-/* INFORMATION */
-
-.info-list {
-    display:flex;
-    flex-direction:column;
-}
-
-.info-item {
-    display:flex;
-    justify-content:space-between;
-    gap:10px;
-    padding:13px 0;
-    border-bottom:1px solid var(--border);
-    font-size:11px;
-}
-
-.info-item:last-child {
-    border-bottom:0;
-}
-
-.info-item span {
-    color:var(--muted);
-}
-
-/* SETTINGS */
-
-.settings-group {
-    margin-bottom:18px;
-}
-
-.settings-group-title {
-    color:var(--muted);
-    font-size:10px;
-    font-weight:900;
-    letter-spacing:1.3px;
-    padding:15px 0 10px;
-}
-
-.setting-row {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    gap:15px;
-    padding:16px 0;
-    border-bottom:1px solid var(--border);
-}
-
-.setting-row:last-child {
-    border-bottom:0;
-}
-
-.setting-info strong {
-    display:block;
-    font-size:12px;
-}
-
-.setting-info p {
-    color:var(--muted);
-    font-size:10px;
-    margin-top:5px;
-    line-height:1.6;
-}
-
-.setting-select {
-    background:var(--panel2);
-    color:white;
-    border:1px solid var(--border);
-    border-radius:7px;
-    padding:9px 11px;
-    outline:none;
-    max-width:145px;
-    font-size:11px;
-}
-
-.toggle {
-    width:43px;
-    height:24px;
-    border:0;
-    border-radius:30px;
-    background:#414b5a;
-    position:relative;
-    flex-shrink:0;
-    transition:.2s;
-}
-
-.toggle::after {
-    content:"";
-    width:18px;
-    height:18px;
-    position:absolute;
-    left:3px;
-    top:3px;
-    border-radius:50%;
-    background:white;
-    transition:.2s;
-}
-
-.toggle.on {
-    background:var(--red);
-}
-
-.toggle.on::after {
-    left:22px;
-}
-
-.settings-action {
-    background:var(--panel2);
-    color:white;
-    border:1px solid var(--border);
-    border-radius:7px;
-    padding:10px 14px;
-    font-size:10px;
-    font-weight:800;
-}
-
-.settings-action:hover {
-    border-color:var(--red);
-}
-
-.settings-status {
-    color:var(--green);
-    font-size:10px;
-    margin-top:12px;
-}
-
-/* DESKTOP MODE */
-
-body.desktop-mode .main {
-    min-width:1050px;
-}
-
-body.desktop-mode .content {
-    max-width:none;
-    width:1200px;
-    margin-left:auto;
-    margin-right:auto;
-}
-
-body.desktop-mode .dashboard-grid {
-    grid-template-columns:minmax(0,1fr) 310px;
-}
-
-body.desktop-mode .club-grid {
-    grid-template-columns:repeat(4,minmax(0,1fr));
-}
-
-body.desktop-mode .news-grid {
-    grid-template-columns:repeat(3,1fr);
-}
-
-/* COMPACT */
-
-body.compact-mode .card-header {
-    padding:11px 15px;
-}
-
-body.compact-mode .club {
-    min-height:115px;
-    padding:12px 8px;
-}
-
-body.hide-images .club img,
-body.hide-images .news-card img {
-    display:none;
-}
-
-/* FOOTER */
-
-footer {
-    border-top:1px solid var(--border);
-    padding:25px;
-    text-align:center;
-    color:var(--muted);
-    font-size:10px;
-}
-
-footer strong {
-    color:var(--red);
-}
-
-/* RESPONSIVE */
-
-@media(max-width:1050px) {
-    .dashboard-grid {
-        grid-template-columns:1fr;
-    }
-
-    .club-grid {
-        grid-template-columns:repeat(3,1fr);
-    }
-}
-
-@media(max-width:760px) {
-    body.desktop-mode {
-        overflow-x:auto;
-    }
-
-    body:not(.desktop-mode) .sidebar {
-        width:100%;
-        height:auto;
-        position:fixed;
-        top:auto;
-        bottom:0;
-        left:0;
-        right:0;
-        padding:7px 5px calc(7px + env(safe-area-inset-bottom));
-        border-right:0;
-        border-top:1px solid var(--border);
-        background:#151a23;
-    }
-
-    body:not(.desktop-mode) .brand,
-    body:not(.desktop-mode) .side-label,
-    body:not(.desktop-mode) .side-bottom {
-        display:none;
-    }
-
-    body:not(.desktop-mode) .nav-list {
-        flex-direction:row;
-        justify-content:space-around;
-        gap:2px;
-    }
-
-    body:not(.desktop-mode) .nav-link {
-        flex:1;
-        min-width:0;
-        padding:9px 2px;
-        flex-direction:column;
-        justify-content:center;
-        gap:4px;
-        text-align:center;
-        font-size:8px;
-    }
-
-    body:not(.desktop-mode) .nav-link.active {
-        box-shadow:inset 0 2px var(--red);
-    }
-
-    body:not(.desktop-mode) .nav-icon {
-        font-size:17px;
-    }
-
-    body:not(.desktop-mode) .main {
-        margin-left:0;
-        padding-bottom:80px;
-        min-width:0;
-    }
-
-    body:not(.desktop-mode) .topbar {
-        height:58px;
-        padding:0 17px;
-    }
-
-    body:not(.desktop-mode) .content {
-        width:100%;
-        padding:18px 14px 35px;
-    }
-
-    body:not(.desktop-mode) .league-banner {
-        min-height:165px;
-        padding:22px;
-    }
-
-    body:not(.desktop-mode) .banner-content h1 {
-        font-size:29px;
-    }
-
-    body:not(.desktop-mode) .stats-grid {
-        gap:8px;
-    }
-
-    body:not(.desktop-mode) .stat-card {
-        padding:12px 10px;
-    }
-
-    body:not(.desktop-mode) .stat-card strong {
-        font-size:17px;
-    }
-
-    body:not(.desktop-mode) .club-grid {
-        grid-template-columns:repeat(2,minmax(0,1fr));
-    }
-
-    body:not(.desktop-mode) .news-grid {
-        grid-template-columns:1fr;
-    }
-
-    body:not(.desktop-mode) .page-heading h2 {
-        font-size:17px;
-    }
-}
-
-@media(max-width:390px) {
-    body:not(.desktop-mode) .nav-link {
-        font-size:7px;
-    }
-
-    body:not(.desktop-mode) .stats-grid {
-        grid-template-columns:1fr;
-    }
+    backdrop-filter:blur(18px);
+    justify-content:space-around;
+  }
+  .bottom-btn{
+    border:0;background:transparent;
+    color:#778598;
+    display:flex;flex:1;
+    align-items:center;justify-content:center;
+    flex-direction:column;gap:5px;
+    font-size:9px;font-weight:750;
+    min-width:0;
+  }
+  .bottom-btn svg{width:21px;height:21px}
+  .bottom-btn.active{color:var(--red)}
+  .bottom-btn.active svg{filter:drop-shadow(0 0 5px #ed293955)}
+  .mobile-brand{display:flex;align-items:center;gap:8px}
+  .mobile-brand .brand-mark{width:30px;height:30px;border-radius:9px;font-size:13px}
+  .mobile-brand strong{font-size:12px}
+  .top-title{display:none}
+  .season{font-size:9px}
+}
+@media(max-width:390px){
+  .bottom-btn{font-size:8px}
+  .hero-mark{display:none}
+  .stats{gap:8px}
+  .stat-value{font-size:19px}
 }
 </style>
 </head>
 
 <body>
+<div class="app">
 
+<!-- SVG ICON LIBRARY -->
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none">
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1z" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-ball" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m12 7 4 3-1.5 5h-5L8 10zm0-4v4m8 5-4 1m-8-1-5 1m9 5-1 3m3-3 1 3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M7 3v4m10-4v4M3 10h18m-13 4h2m4 0h2m-8 3h2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-trophy" viewBox="0 0 24 24"><path d="M8 21h8m-4-4v4M7 4h10v5a5 5 0 0 1-10 0zm0 2H3v2a5 5 0 0 0 5 5m9-7h4v2a5 5 0 0 1-5 5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m9 12 2 2 4-4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-newspaper" viewBox="0 0 24 24"><path d="M4 4h16v16H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2zm4 4h8v5H8zm0 8h8m-8 3h5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/></symbol>
+  <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m19.4 15 .1.1 1.4 1.1-1.5 2.6-1.7-.7a8 8 0 0 1-1.7 1l-.3 1.9h-3l-.3-1.9a8 8 0 0 1-1.7-1l-1.7.7-1.5-2.6 1.4-1.1a8 8 0 0 1 0-2L6 11.9l1.5-2.6 1.7.7a8 8 0 0 1 1.7-1l.3-1.9h3l.3 1.9a8 8 0 0 1 1.7 1l1.7-.7 1.5 2.6-1.4 1.1a8 8 0 0 1-.1 2z" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 7v5l3 2" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2m7-10a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm13 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></symbol>
+</svg>
+
+<!-- SIDEBAR -->
 <aside class="sidebar">
-    <div class="brand">DARKALPHA<span>10</span></div>
-    <div class="side-label">FOOTBALL MENU</div>
-
-    <nav class="nav-list">
-
-        <button class="nav-link active" data-page="overview">
-            <span class="nav-icon">⌂</span>Overview
-        </button>
-
-        <button class="nav-link" data-page="live">
-            <span class="nav-icon">◉</span>Live
-        </button>
-
-        <button class="nav-link" data-page="fixtures">
-            <span class="nav-icon">▦</span>Fixtures
-        </button>
-
-        <button class="nav-link" data-page="results">
-            <span class="nav-icon">◷</span>Results
-        </button>
-
-        <button class="nav-link" data-page="standings">
-            <span class="nav-icon">☷</span>Standings
-        </button>
-
-        <button class="nav-link" data-page="clubs">
-            <span class="nav-icon">♧</span>Clubs
-        </button>
-
-        <button class="nav-link" data-page="news">
-            <span class="nav-icon">▤</span>News
-        </button>
-
-        <button class="nav-link" data-page="settings">
-            <span class="nav-icon">⚙</span>Settings
-        </button>
-
-    </nav>
-
-    <div class="side-bottom">
-        LaLiga Football Center<br>
-        Powered by DarkAlpha10
+  <div class="brand">
+    <div class="brand-mark">DA</div>
+    <div>
+      <div class="brand-name">DARK<span>ALPHA</span>10</div>
+      <div class="brand-sub">FOOTBALL CENTER</div>
     </div>
+  </div>
+
+  <div class="nav-label">MAIN MENU</div>
+  <nav class="nav-list">
+    <button class="nav-btn active" data-page="overview"><svg><use href="#i-home"/></svg>Overview</button>
+    <button class="nav-btn" data-page="live"><svg><use href="#i-ball"/></svg>Live Scores</button>
+    <button class="nav-btn" data-page="fixtures"><svg><use href="#i-calendar"/></svg>Fixtures & Results</button>
+    <button class="nav-btn" data-page="standings"><svg><use href="#i-trophy"/></svg>Standings</button>
+    <button class="nav-btn" data-page="clubs"><svg><use href="#i-shield"/></svg>Clubs</button>
+    <button class="nav-btn" data-page="news"><svg><use href="#i-newspaper"/></svg>News</button>
+  </nav>
+
+  <div class="nav-label">PREFERENCES</div>
+  <nav class="nav-list">
+    <button class="nav-btn" data-page="settings"><svg><use href="#i-settings"/></svg>Settings</button>
+  </nav>
+
+  <div class="sidebar-bottom">
+    <div class="sidebar-note">
+      <strong>DarkAlpha10 Football</strong><br>
+      Your LaLiga match center.<br>
+      <span style="color:var(--red)">●</span> Independent football portal
+    </div>
+  </div>
 </aside>
 
+<!-- MAIN -->
 <main class="main">
-
-    <header class="topbar">
-        <div class="topbar-left">
-            <div class="topbar-title" id="topTitle">Overview</div>
-            <span class="topbar-tag">LALIGA</span>
-        </div>
-        <div class="topbar-right">Spain · 2026/27</div>
-    </header>
-
-    <div class="content">
-
-        <div class="league-banner">
-            <div class="banner-content">
-                <div class="banner-kicker">SPAIN · FIRST DIVISION</div>
-                <h1>LaLiga</h1>
-                <p>The home of Spanish football.</p>
-                <div class="banner-season">2026 / 2027 SEASON</div>
-            </div>
-        </div>
-
-        <!-- OVERVIEW -->
-
-        <section class="page-view active" id="page-overview">
-
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">DASHBOARD</div>
-                    <h2>LaLiga Overview</h2>
-                    <p>Your central place for Spanish football.</p>
-                </div>
-            </div>
-
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <span>COMPETITION</span>
-                    <strong>LaLiga</strong>
-                    <small>Spain</small>
-                </div>
-                <div class="stat-card">
-                    <span>CLUBS</span>
-                    <strong>20</strong>
-                    <small>Participating teams</small>
-                </div>
-                <div class="stat-card">
-                    <span>SEASON</span>
-                    <strong>26/27</strong>
-                    <small>2026 — 2027</small>
-                </div>
-            </div>
-
-            <div class="dashboard-grid">
-                <div class="card">
-                    <div class="card-header">
-                        <h3>Today's Matches</h3>
-                        <small>LaLiga Match Center</small>
-                    </div>
-                    <div class="match-widget">
-                        <div class="rotascore-widget"
-                             data-type="matches"
-                             data-leagues="vl7oqdehlyr510j"
-                             data-locale="en">
-                        </div>
-                    </div>
-                    <div class="widget-note">Match data provided by Rotascore.</div>
-                </div>
-
-                <div>
-                    <div class="card">
-                        <div class="card-header"><h3>Competition Details</h3></div>
-                        <div class="card-body info-list">
-                            <div class="info-item"><span>Country</span><strong>Spain</strong></div>
-                            <div class="info-item"><span>League</span><strong>LaLiga</strong></div>
-                            <div class="info-item"><span>Teams</span><strong>20</strong></div>
-                            <div class="info-item"><span>Season</span><strong>2026/27</strong></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- LIVE -->
-
-        <section class="page-view" id="page-live">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">LIVE FOOTBALL</div>
-                    <h2>Live Scores</h2>
-                    <p>Follow LaLiga matches and score updates.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>LaLiga Live Center</h3>
-                    <small>Live scores and match times</small>
-                </div>
-                <div class="match-widget">
-                    <div class="rotascore-widget"
-                         data-type="matches"
-                         data-leagues="vl7oqdehlyr510j"
-                         data-locale="en">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FIXTURES -->
-
-        <section class="page-view" id="page-fixtures">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">MATCH SCHEDULE</div>
-                    <h2>Fixtures</h2>
-                    <p>LaLiga match schedule and kickoff information.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3>LaLiga Matches</h3>
-                    <small>Match schedule</small>
-                </div>
-                <div class="match-widget">
-                    <div class="rotascore-widget"
-                         data-type="matches"
-                         data-leagues="vl7oqdehlyr510j"
-                         data-locale="en">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- RESULTS -->
-
-        <section class="page-view" id="page-results">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">COMPLETED MATCHES</div>
-                    <h2>Results</h2>
-                    <p>LaLiga match scores and results.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header"><h3>Match Results</h3></div>
-                <div class="card-body">
-                    <p style="font-size:12px;color:var(--muted);line-height:1.8">
-                        View completed matches, scores and match details.
-                    </p>
-                    <a class="settings-action"
-                       href="https://www.rotascore.com/en/league/la-liga/vl7oqdehlyr510j"
-                       target="_blank" rel="noopener"
-                       style="display:inline-block;margin-top:15px">
-                        View Results ↗
-                    </a>
-                </div>
-            </div>
-        </section>
-
-        <!-- STANDINGS -->
-
-        <section class="page-view" id="page-standings">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">LEAGUE RANKING</div>
-                    <h2>League Standings</h2>
-                    <p>Team positions, matches, goal difference and points.</p>
-                </div>
-            </div>
-            <div class="card">
-                <div class="card-header">
-                    <h3>LaLiga Table</h3>
-                    <small>2026/27</small>
-                </div>
-                <div class="table-widget">
-                    <div class="rotascore-widget"
-                         data-type="standings"
-                         data-leagues="vl7oqdehlyr510j"
-                         data-locale="en">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- CLUBS -->
-
-        <section class="page-view" id="page-clubs">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">TEAMS</div>
-                    <h2>LaLiga Clubs</h2>
-                    <p>Full club names and team badges.</p>
-                </div>
-            </div>
-
-            <div class="club-grid">
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/81.png" alt="Barcelona">
-                    <h3>FC Barcelona</h3>
-                    <p>Barcelona</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/86.png" alt="Real Madrid">
-                    <h3>Real Madrid CF</h3>
-                    <p>Madrid</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/78.png" alt="Atletico Madrid">
-                    <h3>Club Atlético de Madrid</h3>
-                    <p>Madrid</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/94.png" alt="Villarreal">
-                    <h3>Villarreal CF</h3>
-                    <p>Villarreal</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/559.png" alt="Sevilla">
-                    <h3>Sevilla FC</h3>
-                    <p>Seville</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/77.png" alt="Athletic Club">
-                    <h3>Athletic Club</h3>
-                    <p>Bilbao</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/92.png" alt="Real Sociedad">
-                    <h3>Real Sociedad de Fútbol</h3>
-                    <p>San Sebastian</p>
-                </div>
-
-                <div class="club">
-                    <img src="https://crests.football-data.org/82.png" alt="Getafe">
-                    <h3>Getafe CF</h3>
-                    <p>Getafe</p>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- NEWS -->
-
-        <section class="page-view" id="page-news">
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">LATEST STORIES</div>
-                    <h2>Football News</h2>
-                    <p>LaLiga news and editorial updates.</p>
-                </div>
-            </div>
-
-            <div class="news-grid">
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=85" alt="Football stadium">
-                    <div class="news-card-content">
-                        <span>LALIGA</span>
-                        <h3>The race for the Spanish league title</h3>
-                        <p>Follow the clubs competing for the top position.</p>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?auto=format&fit=crop&w=700&q=85" alt="Football match">
-                    <div class="news-card-content">
-                        <span>MATCH DAY</span>
-                        <h3>Every match brings new opportunities</h3>
-                        <p>Explore the latest match schedule and results.</p>
-                    </div>
-                </article>
-
-                <article class="news-card">
-                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=700&q=85" alt="Football players">
-                    <div class="news-card-content">
-                        <span>FOOTBALL</span>
-                        <h3>Discover the clubs of Spanish football</h3>
-                        <p>Explore teams and competition history.</p>
-                    </div>
-                </article>
-            </div>
-        </section>
-
-        <!-- SETTINGS -->
-
-        <section class="page-view" id="page-settings">
-
-            <div class="page-heading">
-                <div>
-                    <div class="section-kicker">PERSONALIZATION</div>
-                    <h2>Settings</h2>
-                    <p>Customize your LaLiga experience.</p>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>Appearance</h3>
-                    <small>Display preferences</small>
-                </div>
-
-                <div class="card-body">
-
-                    <div class="settings-group">
-                        <div class="settings-group-title">LAYOUT</div>
-
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Desktop Site</strong>
-                                <p>Use the desktop layout even on a mobile screen.</p>
-                            </div>
-                            <button class="toggle" id="desktopToggle"
-                                role="switch" aria-checked="false"
-                                aria-label="Desktop Site"></button>
-                        </div>
-
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Compact Mode</strong>
-                                <p>Reduce spacing and make content more compact.</p>
-                            </div>
-                            <button class="toggle" id="compactToggle"
-                                role="switch" aria-checked="false"
-                                aria-label="Compact Mode"></button>
-                        </div>
-                    </div>
-
-                    <div class="settings-group">
-                        <div class="settings-group-title">CONTENT</div>
-
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Team Badges</strong>
-                                <p>Show or hide team logos and images.</p>
-                            </div>
-                            <button class="toggle on" id="imagesToggle"
-                                role="switch" aria-checked="true"
-                                aria-label="Team Badges"></button>
-                        </div>
-
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Text Size</strong>
-                                <p>Adjust the overall text size.</p>
-                            </div>
-                            <select class="setting-select" id="fontSize">
-                                <option value="0.9">Small</option>
-                                <option value="1" selected>Normal</option>
-                                <option value="1.1">Large</option>
-                                <option value="1.2">Extra Large</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="settings-group">
-                        <div class="settings-group-title">PREFERENCES</div>
-
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Default Page</strong>
-                                <p>Choose which page opens when you visit the site.</p>
-                            </div>
-                            <select class="setting-select" id="defaultPage">
-                                <option value="overview">Overview</option>
-                                <option value="live">Live</option>
-                                <option value="fixtures">Fixtures</option>
-                                <option value="results">Results</option>
-                                <option value="standings">Standings</option>
-                                <option value="clubs">Clubs</option>
-                                <option value="news">News</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="settings-group">
-                        <div class="settings-group-title">RESET</div>
-                        <div class="setting-row">
-                            <div class="setting-info">
-                                <strong>Reset Settings</strong>
-                                <p>Restore all preferences to their defaults.</p>
-                            </div>
-                            <button class="settings-action" id="resetSettings">
-                                Reset
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="settings-status" id="settingsStatus">
-                        Your preferences are saved in this browser.
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h3>About This Website</h3>
-                </div>
-                <div class="card-body info-list">
-                    <div class="info-item">
-                        <span>Website</span>
-                        <strong>DarkAlpha10 Football</strong>
-                    </div>
-                    <div class="info-item">
-                        <span>Competition</span>
-                        <strong>LaLiga</strong>
-                    </div>
-                    <div class="info-item">
-                        <span>Version</span>
-                        <strong>2.0</strong>
-                    </div>
-                </div>
-            </div>
-
-        </section>
-
+  <header class="topbar">
+    <div class="top-left">
+      <div class="mobile-brand">
+        <div class="brand-mark">DA</div>
+        <strong>DARKALPHA10</strong>
+      </div>
+      <div class="top-title">LaLiga Match Center</div>
+      <span class="top-tag">SPAIN</span>
     </div>
+    <div class="top-right">
+      <span class="season">2026 / 2027 SEASON</span>
+      <div class="live-indicator"><span class="live-dot"></span> MATCH CENTER</div>
+    </div>
+  </header>
 
-    <footer>
-        LaLiga Central · Built for <strong>DarkAlpha10</strong>
-    </footer>
+  <div class="content">
 
+    <!-- OVERVIEW -->
+    <section class="page active" id="page-overview">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">DARKALPHA10 / FOOTBALL</div>
+          <h1>LaLiga Overview</h1>
+          <div class="subtitle">Everything happening in Spanish football, in one place.</div>
+        </div>
+      </div>
+
+      <div class="card hero">
+        <div>
+          <div class="eyebrow">2026 — 2027 SEASON</div>
+          <h2>THE HOME OF<br>SPANISH FOOTBALL.</h2>
+          <p>Follow match scores, fixtures, results, league standings and clubs from LaLiga.</p>
+          <button class="hero-btn" onclick="showPage('fixtures')">
+            Explore Matches <svg width="16" height="16"><use href="#i-arrow"/></svg>
+          </button>
+        </div>
+        <div class="hero-mark">LALIGA</div>
+      </div>
+
+      <div class="stats">
+        <div class="card stat">
+          <div class="stat-icon"><svg><use href="#i-ball"/></svg></div>
+          <div class="stat-label">Competition</div>
+          <div class="stat-value">LaLiga</div>
+          <div class="stat-foot">Spanish First Division</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-icon"><svg><use href="#i-users"/></svg></div>
+          <div class="stat-label">Clubs</div>
+          <div class="stat-value">20</div>
+          <div class="stat-foot">Teams in the league</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-icon"><svg><use href="#i-calendar"/></svg></div>
+          <div class="stat-label">Season</div>
+          <div class="stat-value">26/27</div>
+          <div class="stat-foot">Current season label</div>
+        </div>
+        <div class="card stat">
+          <div class="stat-icon"><svg><use href="#i-trophy"/></svg></div>
+          <div class="stat-label">League</div>
+          <div class="stat-value">Spain</div>
+          <div class="stat-foot">Top division</div>
+        </div>
+      </div>
+
+      <div class="two-col">
+        <div class="card">
+          <div class="panel-head">
+            <strong>Match Center</strong>
+            <span>LaLiga fixtures</span>
+          </div>
+          <div class="panel-body">
+            <div class="quick-links">
+              <button class="quick-link" onclick="showPage('live')">
+                <svg><use href="#i-ball"/></svg>
+                Live matches
+                <svg class="arrow"><use href="#i-arrow"/></svg>
+              </button>
+              <button class="quick-link" onclick="showPage('fixtures')">
+                <svg><use href="#i-calendar"/></svg>
+                Today's matches
+                <svg class="arrow"><use href="#i-arrow"/></svg>
+              </button>
+              <button class="quick-link" onclick="showPage('standings')">
+                <svg><use href="#i-trophy"/></svg>
+                League standings
+                <svg class="arrow"><use href="#i-arrow"/></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="panel-head">
+            <strong>Competition</strong>
+            <span>2026/27</span>
+          </div>
+          <div class="panel-body">
+            <div style="font-size:13px;font-weight:800">Spanish LaLiga</div>
+            <p class="subtitle">Follow clubs, matchdays and the league table throughout the season.</p>
+            <button class="hero-btn" onclick="showPage('clubs')">Explore Clubs <svg width="15" height="15"><use href="#i-arrow"/></svg></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LIVE -->
+    <section class="page" id="page-live">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">MATCH CENTER</div>
+          <h1>Live Scores</h1>
+          <div class="subtitle">Matches currently being played in LaLiga.</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="live-widget">
+        <div class="widget-loading"><div class="spinner"></div>Loading live matches...</div>
+      </div>
+      <div class="note">Scores and match events are supplied by Rotascore. If no match is being played, the live list may be empty.</div>
+    </section>
+
+    <!-- FIXTURES -->
+    <section class="page" id="page-fixtures">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">MATCH SCHEDULE</div>
+          <h1>Fixtures & Results</h1>
+          <div class="subtitle">Choose a day to view LaLiga matches and scores.</div>
+        </div>
+      </div>
+
+      <div class="day-tabs">
+        <button class="day-btn" data-day="yesterday">Yesterday</button>
+        <button class="day-btn active" data-day="today">Today</button>
+        <button class="day-btn" data-day="tomorrow">Tomorrow</button>
+      </div>
+      <div class="date-label" id="selected-date"></div>
+
+      <div class="widget-wrap" id="matches-widget">
+        <div class="widget-loading"><div class="spinner"></div>Loading matches...</div>
+      </div>
+      <div class="note">The match list is loaded from the external football data provider. A day with no scheduled LaLiga match can legitimately show no games.</div>
+    </section>
+
+    <!-- STANDINGS -->
+    <section class="page" id="page-standings">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">LEAGUE TABLE</div>
+          <h1>Standings</h1>
+          <div class="subtitle">Current LaLiga table and club positions.</div>
+        </div>
+      </div>
+      <div class="widget-wrap" id="standings-widget">
+        <div class="widget-loading"><div class="spinner"></div>Loading league table...</div>
+      </div>
+    </section>
+
+    <!-- CLUBS -->
+    <section class="page" id="page-clubs">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">THE TEAMS</div>
+          <h1>LaLiga Clubs</h1>
+          <div class="subtitle">Clubs participating in the Spanish league.</div>
+        </div>
+      </div>
+      <div class="club-grid" id="club-grid"></div>
+      <div class="note">Club list and badges are illustrative. Confirm the current season's official participants before treating this list as the final 2026/27 lineup.</div>
+    </section>
+
+    <!-- NEWS -->
+    <section class="page" id="page-news">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">LATEST UPDATES</div>
+          <h1>Football News</h1>
+          <div class="subtitle">News section for LaLiga updates.</div>
+        </div>
+      </div>
+      <div class="news-grid">
+        <article class="card news-card">
+          <div class="news-tag">LALIGA</div>
+          <h3>Follow the latest league developments</h3>
+          <p>Check match results, club performances and the league table throughout the season.</p>
+          <div class="news-date">DARKALPHA10 FOOTBALL</div>
+        </article>
+        <article class="card news-card">
+          <div class="news-tag">MATCH CENTER</div>
+          <h3>Track fixtures and live scores</h3>
+          <p>Use the match center to follow the daily schedule and completed games.</p>
+          <div class="news-date">DARKALPHA10 FOOTBALL</div>
+        </article>
+        <article class="card news-card">
+          <div class="news-tag">CLUBS</div>
+          <h3>Explore Spanish football clubs</h3>
+          <p>Find the clubs and their badges in the dedicated clubs section.</p>
+          <div class="news-date">DARKALPHA10 FOOTBALL</div>
+        </article>
+      </div>
+      <div class="note">These are informational placeholders, not live news articles.</div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="page" id="page-settings">
+      <div class="page-heading">
+        <div>
+          <div class="eyebrow">CUSTOMIZE YOUR EXPERIENCE</div>
+          <h1>Settings</h1>
+          <div class="subtitle">Manage the appearance and behavior of the website.</div>
+        </div>
+      </div>
+
+      <div class="settings-list">
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Desktop Site</strong>
+            <small>Force the wide desktop layout on smaller screens.</small>
+          </div>
+          <button class="switch" id="desktop-switch" aria-label="Desktop Site"></button>
+        </div>
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Compact Mode</strong>
+            <small>Reduce spacing between cards and sections.</small>
+          </div>
+          <button class="switch" id="compact-switch" aria-label="Compact Mode"></button>
+        </div>
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Team Badges</strong>
+            <small>Show or hide team logos in the clubs section.</small>
+          </div>
+          <button class="switch on" id="badges-switch" aria-label="Team Badges"></button>
+        </div>
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Text Size</strong>
+            <small>Change the overall text size.</small>
+          </div>
+          <select id="text-size">
+            <option value="normal">Normal</option>
+            <option value="small">Small</option>
+            <option value="large">Large</option>
+          </select>
+        </div>
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Default Page</strong>
+            <small>Choose which section opens when the website loads.</small>
+          </div>
+          <select id="default-page">
+            <option value="overview">Overview</option>
+            <option value="live">Live Scores</option>
+            <option value="fixtures">Fixtures</option>
+            <option value="standings">Standings</option>
+            <option value="clubs">Clubs</option>
+            <option value="news">News</option>
+          </select>
+        </div>
+        <div class="card setting">
+          <div class="setting-info">
+            <strong>Reset Settings</strong>
+            <small>Restore the default website preferences.</small>
+          </div>
+          <button class="danger-btn" id="reset-settings">Reset</button>
+        </div>
+      </div>
+    </section>
+
+  </div>
 </main>
 
-<script async src="https://www.rotascore.com/embed/v1.js"></script>
+<!-- MOBILE BOTTOM NAV -->
+<nav class="bottom-nav">
+  <button class="bottom-btn active" data-page="overview"><svg><use href="#i-home"/></svg><span>Home</span></button>
+  <button class="bottom-btn" data-page="live"><svg><use href="#i-ball"/></svg><span>Live</span></button>
+  <button class="bottom-btn" data-page="fixtures"><svg><use href="#i-calendar"/></svg><span>Matches</span></button>
+  <button class="bottom-btn" data-page="standings"><svg><use href="#i-trophy"/></svg><span>Table</span></button>
+  <button class="bottom-btn" data-page="clubs"><svg><use href="#i-shield"/></svg><span>Clubs</span></button>
+  <button class="bottom-btn" data-page="settings"><svg><use href="#i-settings"/></svg><span>Settings</span></button>
+</nav>
+
+</div>
 
 <script>
-/* NAVIGATION */
+/* ================================
+   DARKALPHA10 - LALIGA MATCH CENTER
+================================ */
 
-const navLinks = document.querySelectorAll(".nav-link");
-const pages = document.querySelectorAll(".page-view");
-const topTitle = document.getElementById("topTitle");
+const LEAGUE_ID = "vl7oqdehlyr510j";
+const ROTASCORE_SCRIPT = "https://www.rotascore.com/embed/v1.js";
 
-const pageNames = {
-    overview:"Overview",
-    live:"Live Scores",
-    fixtures:"Fixtures",
-    results:"Results",
-    standings:"Standings",
-    clubs:"Clubs",
-    news:"News",
-    settings:"Settings"
+const clubs = [
+  {name:"FC Barcelona",id:81},
+  {name:"Real Madrid CF",id:86},
+  {name:"Club Atlético de Madrid",id:78},
+  {name:"Villarreal CF",id:94},
+  {name:"Sevilla FC",id:559},
+  {name:"Athletic Club",id:77},
+  {name:"Real Sociedad de Fútbol",id:92},
+  {name:"Getafe CF",id:82},
+  {name:"Valencia CF",id:95},
+  {name:"Real Betis Balompié",id:90},
+  {name:"Girona FC",id:298},
+  {name:"CA Osasuna",id:79},
+  {name:"RCD Mallorca",id:84},
+  {name:"RC Celta de Vigo",id:558},
+  {name:"Rayo Vallecano",id:87},
+  {name:"Deportivo Alavés",id:263},
+  {name:"RCD Espanyol",id:80},
+  {name:"Elche CF",id:285},
+  {name:"Levante UD",id:88},
+  {name:"Real Oviedo",id:1048}
+];
+
+let settings = {
+  desktop:false,
+  compact:false,
+  badges:true,
+  textSize:"normal",
+  defaultPage:"overview"
 };
 
-function showPage(pageName) {
-    if (!pageNames[pageName]) pageName = "overview";
+let selectedDay = "today";
+let rotascoreLoaded = false;
+let widgetsInitialized = {
+  live:false,
+  matches:false,
+  standings:false
+};
 
-    pages.forEach(page => {
-        page.classList.toggle(
-            "active",
-            page.id === "page-" + pageName
-        );
-    });
-
-    navLinks.forEach(link => {
-        link.classList.toggle(
-            "active",
-            link.dataset.page === pageName
-        );
-    });
-
-    topTitle.textContent = pageNames[pageName];
-
-    window.scrollTo({top:0,behavior:"smooth"});
+function loadSettings(){
+  try{
+    const saved = localStorage.getItem("da10_laliga_settings");
+    if(saved) settings = {...settings,...JSON.parse(saved)};
+  }catch(error){
+    console.warn("Settings could not be loaded.",error);
+  }
+  applySettings();
 }
 
-navLinks.forEach(link => {
-    link.addEventListener("click", () => {
-        showPage(link.dataset.page);
-    });
+function saveSettings(){
+  localStorage.setItem("da10_laliga_settings",JSON.stringify(settings));
+}
+
+function applySettings(){
+  document.body.classList.toggle("desktop-mode",!!settings.desktop);
+  document.body.classList.toggle("compact",!!settings.compact);
+  document.body.classList.toggle("small-text",settings.textSize==="small");
+  document.body.classList.toggle("large-text",settings.textSize==="large");
+
+  setSwitch("desktop-switch",settings.desktop);
+  setSwitch("compact-switch",settings.compact);
+  setSwitch("badges-switch",settings.badges);
+
+  document.getElementById("text-size").value=settings.textSize;
+  document.getElementById("default-page").value=settings.defaultPage;
+
+  document.querySelectorAll(".club-card img").forEach(img=>{
+    img.style.display=settings.badges?"":"none";
+  });
+}
+
+function setSwitch(id,on){
+  const el=document.getElementById(id);
+  if(el) el.classList.toggle("on",!!on);
+}
+
+function toggleSetting(key,id){
+  settings[key]=!settings[key];
+  saveSettings();
+  applySettings();
+}
+
+document.getElementById("desktop-switch").addEventListener("click",()=>{
+  toggleSetting("desktop","desktop-switch");
 });
-
-/* SETTINGS */
-
-const defaults = {
+document.getElementById("compact-switch").addEventListener("click",()=>{
+  toggleSetting("compact","compact-switch");
+});
+document.getElementById("badges-switch").addEventListener("click",()=>{
+  toggleSetting("badges","badges-switch");
+});
+document.getElementById("text-size").addEventListener("change",e=>{
+  settings.textSize=e.target.value;
+  saveSettings();
+  applySettings();
+});
+document.getElementById("default-page").addEventListener("change",e=>{
+  settings.defaultPage=e.target.value;
+  saveSettings();
+});
+document.getElementById("reset-settings").addEventListener("click",()=>{
+  settings={
     desktop:false,
     compact:false,
-    images:true,
-    font:"1",
+    badges:true,
+    textSize:"normal",
     defaultPage:"overview"
-};
+  };
+  saveSettings();
+  applySettings();
+  showPage("overview");
+});
 
-function loadSettings() {
-    try {
-        return {
-            ...defaults,
-            ...JSON.parse(localStorage.getItem("da10_laliga_settings") || "{}")
-        };
-    } catch {
-        return {...defaults};
+/* PAGE NAVIGATION */
+function showPage(page){
+  const target=document.getElementById("page-"+page);
+  if(!target) return;
+
+  document.querySelectorAll(".page").forEach(p=>p.classList.remove("active"));
+  target.classList.add("active");
+
+  document.querySelectorAll("[data-page]").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.page===page);
+  });
+
+  window.scrollTo({top:0,behavior:"smooth"});
+
+  if(page==="live") loadLiveWidget();
+  if(page==="fixtures") loadMatchesWidget(selectedDay);
+  if(page==="standings") loadStandingsWidget();
+}
+
+document.querySelectorAll("[data-page]").forEach(btn=>{
+  btn.addEventListener("click",()=>showPage(btn.dataset.page));
+});
+
+/* ROTASCORE SCRIPT */
+function loadRotascoreScript(callback){
+  if(window.RotascoreWidgets){
+    callback?.();
+    return;
+  }
+
+  if(rotascoreLoaded){
+    const existing=document.querySelector('script[src="'+ROTASCORE_SCRIPT+'"]');
+    if(existing){
+      existing.addEventListener("load",()=>callback?.(),{once:true});
+      return;
     }
+  }
+
+  rotascoreLoaded=true;
+  const script=document.createElement("script");
+  script.src=ROTASCORE_SCRIPT;
+  script.async=true;
+  script.onload=()=>callback?.();
+  script.onerror=()=>{
+    document.querySelectorAll(".widget-loading").forEach(el=>{
+      el.innerHTML="Unable to load the match provider. Check your internet connection and refresh.";
+    });
+  };
+  document.body.appendChild(script);
 }
 
-let settings = loadSettings();
+/* WIDGET CONTAINER */
+function createWidget(containerId,type,day=null){
+  const container=document.getElementById(containerId);
+  if(!container) return;
 
-function saveSettings() {
-    localStorage.setItem(
-        "da10_laliga_settings",
-        JSON.stringify(settings)
-    );
+  container.innerHTML="";
+  const widget=document.createElement("div");
+  widget.className="rotascore-widget";
+  widget.dataset.type=type;
+  widget.dataset.locale="en";
+  widget.dataset.theme="dark";
 
-    document.getElementById("settingsStatus").textContent =
-        "Settings saved successfully.";
+  if(type==="matches"){
+    widget.dataset.leagues=LEAGUE_ID;
+    widget.dataset.day=day || "today";
+    widget.dataset.tz="Asia/Kabul";
+  }
+
+  if(type==="standings"){
+    widget.dataset.league=LEAGUE_ID;
+  }
+
+  if(type==="matches" && day==="today"){
+    widget.dataset.day="today";
+  }
+
+  if(type==="matches"){
+    widget.innerHTML='<noscript><a href="https://www.rotascore.com/en">LaLiga scores by Rotascore</a></noscript>';
+  }
+
+  container.appendChild(widget);
+  container.insertAdjacentHTML("beforeend",
+    '<div class="widget-loading"><div class="spinner"></div>Loading football data...</div>'
+  );
+
+  loadRotascoreScript(()=>{
+    const loading=container.querySelector(".widget-loading");
+    if(loading) loading.remove();
+
+    if(window.RotascoreWidgets && typeof window.RotascoreWidgets.scan==="function"){
+      window.RotascoreWidgets.scan();
+    }
+  });
 }
 
-function setToggle(id, value) {
-    const button = document.getElementById(id);
-    button.classList.toggle("on",value);
-    button.setAttribute("aria-checked",String(value));
+function loadLiveWidget(){
+  if(widgetsInitialized.live) return;
+  widgetsInitialized.live=true;
+
+  const container=document.getElementById("live-widget");
+  container.innerHTML="";
+
+  const widget=document.createElement("div");
+  widget.className="rotascore-widget";
+  widget.dataset.type="matches";
+  widget.dataset.leagues=LEAGUE_ID;
+  widget.dataset.locale="en";
+  widget.dataset.theme="dark";
+  widget.dataset.live="1";
+  widget.dataset.tz="Asia/Kabul";
+  container.appendChild(widget);
+
+  container.insertAdjacentHTML("beforeend",
+    '<div class="widget-loading"><div class="spinner"></div>Loading live matches...</div>'
+  );
+
+  loadRotascoreScript(()=>{
+    const loading=container.querySelector(".widget-loading");
+    if(loading) loading.remove();
+    if(window.RotascoreWidgets?.scan) window.RotascoreWidgets.scan();
+  });
 }
 
-function applySettings() {
-    document.body.classList.toggle("desktop-mode",settings.desktop);
-    document.body.classList.toggle("compact-mode",settings.compact);
-    document.body.classList.toggle("hide-images",!settings.images);
+/* MATCH DATE SELECTOR */
+function getDateForDay(day){
+  const date=new Date();
+  if(day==="yesterday") date.setDate(date.getDate()-1);
+  if(day==="tomorrow") date.setDate(date.getDate()+1);
 
-    document.documentElement.style.setProperty(
-        "--font-scale",
-        settings.font
-    );
-
-    setToggle("desktopToggle",settings.desktop);
-    setToggle("compactToggle",settings.compact);
-    setToggle("imagesToggle",settings.images);
-
-    document.getElementById("fontSize").value = settings.font;
-    document.getElementById("defaultPage").value = settings.defaultPage;
+  return new Intl.DateTimeFormat("en-GB",{
+    weekday:"long",
+    day:"numeric",
+    month:"long",
+    year:"numeric",
+    timeZone:"Asia/Kabul"
+  }).format(date);
 }
 
-function changeSetting(key,value) {
-    settings[key] = value;
-    applySettings();
-    saveSettings();
+function loadMatchesWidget(day){
+  selectedDay=day;
+
+  document.querySelectorAll(".day-btn").forEach(btn=>{
+    btn.classList.toggle("active",btn.dataset.day===day);
+  });
+
+  document.getElementById("selected-date").textContent=getDateForDay(day);
+
+  createWidget("matches-widget","matches",day);
 }
 
-document.getElementById("desktopToggle").addEventListener("click",() => {
-    changeSetting("desktop",!settings.desktop);
+document.querySelectorAll(".day-btn").forEach(btn=>{
+  btn.addEventListener("click",()=>{
+    loadMatchesWidget(btn.dataset.day);
+  });
 });
 
-document.getElementById("compactToggle").addEventListener("click",() => {
-    changeSetting("compact",!settings.compact);
-});
+/* STANDINGS */
+function loadStandingsWidget(){
+  if(widgetsInitialized.standings) return;
+  widgetsInitialized.standings=true;
 
-document.getElementById("imagesToggle").addEventListener("click",() => {
-    changeSetting("images",!settings.images);
-});
+  createWidget("standings-widget","standings");
+}
 
-document.getElementById("fontSize").addEventListener("change",event => {
-    changeSetting("font",event.target.value);
-});
+/* CLUBS */
+function renderClubs(){
+  const grid=document.getElementById("club-grid");
+  grid.innerHTML=clubs.map(club=>`
+    <div class="card club-card">
+      <img src="https://crests.football-data.org/${club.id}.png"
+           alt="${club.name}"
+           loading="lazy"
+           onerror="this.style.visibility='hidden'">
+      <div>
+        <div class="club-name">${club.name}</div>
+        <div class="club-country">SPAIN · LALIGA</div>
+      </div>
+    </div>
+  `).join("");
+}
 
-document.getElementById("defaultPage").addEventListener("change",event => {
-    changeSetting("defaultPage",event.target.value);
-});
+/* STARTUP */
+loadSettings();
+renderClubs();
 
-document.getElementById("resetSettings").addEventListener("click",() => {
-    settings = {...defaults};
-    applySettings();
-    saveSettings();
-    showPage("overview");
-});
+showPage(settings.defaultPage || "overview");
 
-/* INITIALIZE */
-
-applySettings();
-showPage(settings.defaultPage);
 </script>
-
 </body>
 </html>
