@@ -4,22 +4,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#101318">
-<title>LaLiga | DarkAlpha10 Football</title>
+<meta name="theme-color" content="#10141c">
+<title>LaLiga Central | DarkAlpha10</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root {
-    --bg:#101318;
-    --surface:#191e26;
-    --surface2:#222832;
-    --border:#2a303b;
-    --text:#f2f4f7;
-    --muted:#929ba9;
-    --red:#e52b36;
-    --green:#34c98b;
+    --bg:#10141c;
+    --sidebar:#151a23;
+    --panel:#1b222d;
+    --panel2:#222b38;
+    --border:#2b3543;
+    --text:#f4f6f9;
+    --muted:#929eae;
+    --red:#ed2939;
+    --green:#31c58b;
+    --gold:#e5bb70;
 }
 
 * {
@@ -34,285 +37,483 @@ body {
     font-family:Inter,Arial,sans-serif;
 }
 
+button {
+    font:inherit;
+}
+
 a {
     color:inherit;
     text-decoration:none;
 }
 
-button {
-    font:inherit;
+/* MAIN LAYOUT */
+
+.app {
+    min-height:100vh;
 }
 
-/* HEADER */
-
-.header {
-    height:65px;
-    background:#171b22;
-    border-bottom:1px solid var(--border);
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:0 7%;
-    position:sticky;
+.sidebar {
+    width:235px;
+    height:100vh;
+    position:fixed;
     top:0;
+    left:0;
+    background:var(--sidebar);
+    border-right:1px solid var(--border);
+    padding:25px 16px;
     z-index:100;
+    display:flex;
+    flex-direction:column;
 }
 
-.logo {
+.brand {
     font-size:20px;
-    font-weight:800;
+    font-weight:900;
     letter-spacing:-1px;
+    padding:0 12px 28px;
 }
 
-.logo span {
+.brand span {
     color:var(--red);
 }
 
-.header-right {
-    display:flex;
-    align-items:center;
-    gap:20px;
-}
-
-.header-right a {
-    color:var(--muted);
-    font-size:12px;
-    font-weight:600;
-}
-
-.header-right a:hover {
-    color:white;
-}
-
-/* LEAGUE HEADER */
-
-.league-header {
-    background:#191e26;
-    border-bottom:1px solid var(--border);
-    padding:25px 7%;
-}
-
-.league-info {
-    max-width:1200px;
-    margin:auto;
-    display:flex;
-    align-items:center;
-    gap:18px;
-}
-
-.league-icon {
-    width:58px;
-    height:58px;
-    border-radius:12px;
-    background:#252b35;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:29px;
-}
-
-.league-info h1 {
-    font-size:24px;
+.side-label {
+    color:#687586;
+    font-size:10px;
     font-weight:800;
+    letter-spacing:1.5px;
+    padding:12px;
 }
 
-.league-info p {
-    color:var(--muted);
-    font-size:12px;
-    margin-top:5px;
-}
-
-/* NAVIGATION */
-
-.main-nav {
-    background:#171b22;
-    border-bottom:1px solid var(--border);
-    padding:0 7%;
+.nav-list {
     display:flex;
-    gap:28px;
-    overflow-x:auto;
+    flex-direction:column;
+    gap:5px;
 }
 
-.main-nav a {
-    padding:16px 2px;
+.nav-link {
+    width:100%;
+    border:0;
+    background:transparent;
+    color:var(--muted);
+    text-align:left;
+    padding:12px;
+    border-radius:8px;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    gap:13px;
     font-size:12px;
     font-weight:700;
-    color:var(--muted);
-    white-space:nowrap;
-    border-bottom:2px solid transparent;
+    transition:.2s;
 }
 
-.main-nav a.active,
-.main-nav a:hover {
+.nav-link:hover {
+    background:var(--panel2);
     color:white;
-    border-color:var(--red);
 }
 
-/* PAGE */
-
-.container {
-    width:86%;
-    max-width:1200px;
-    margin:28px auto;
+.nav-link.active {
+    color:white;
+    background:rgba(237,41,57,.13);
+    box-shadow:inset 3px 0 var(--red);
 }
 
-.page-title {
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    margin-bottom:16px;
+.nav-icon {
+    width:20px;
+    text-align:center;
+    font-size:16px;
 }
 
-.page-title h2 {
-    font-size:17px;
-    font-weight:800;
-}
-
-.page-title p {
+.side-bottom {
+    margin-top:auto;
+    border-top:1px solid var(--border);
+    padding:18px 10px 0;
     color:var(--muted);
-    font-size:11px;
-    margin-top:4px;
+    font-size:10px;
+    line-height:1.8;
 }
 
-/* CONTENT GRID */
+/* MAIN CONTENT */
 
-.content-grid {
-    display:grid;
-    grid-template-columns:minmax(0,1fr) 310px;
-    gap:20px;
-    align-items:start;
+.main {
+    margin-left:235px;
+    min-height:100vh;
 }
 
-.card {
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:10px;
-    overflow:hidden;
-    margin-bottom:20px;
-}
-
-.card-heading {
-    padding:16px 18px;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
+.topbar {
+    height:68px;
+    background:rgba(21,26,35,.94);
     border-bottom:1px solid var(--border);
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 35px;
+    position:sticky;
+    top:0;
+    z-index:50;
+    backdrop-filter:blur(15px);
 }
 
-.card-heading h3 {
+.topbar-left {
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.topbar-title {
     font-size:13px;
     font-weight:800;
 }
 
-.card-heading span {
-    font-size:10px;
+.topbar-tag {
+    background:rgba(237,41,57,.13);
+    color:#ff6873;
+    border-radius:5px;
+    padding:5px 8px;
+    font-size:9px;
+    font-weight:800;
+}
+
+.topbar-right {
     color:var(--muted);
+    font-size:11px;
 }
 
-.live-dot {
-    color:var(--green) !important;
-}
-
-.live-dot::before {
-    content:"";
-    display:inline-block;
-    width:7px;
-    height:7px;
-    background:var(--green);
-    border-radius:50%;
-    margin-right:6px;
-}
-
-/* MATCH WIDGET */
-
-.widget-area {
-    padding:12px;
-    min-height:180px;
-}
-
-.rotascore-widget {
+.content {
     width:100%;
+    max-width:1450px;
+    margin:auto;
+    padding:30px 35px 60px;
 }
 
-/* DATE NAV */
+/* LEAGUE HERO */
 
-.date-nav {
+.league-banner {
+    min-height:190px;
+    border:1px solid var(--border);
+    border-radius:13px;
+    overflow:hidden;
+    position:relative;
+    background:
+        linear-gradient(90deg,rgba(16,20,28,.98),rgba(16,20,28,.72)),
+        url("https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=1500&q=85") center/cover;
     display:flex;
-    gap:8px;
-    padding:13px;
-    overflow-x:auto;
+    align-items:center;
+    padding:30px;
+    margin-bottom:25px;
+}
+
+.banner-content {
+    position:relative;
+    z-index:2;
+}
+
+.banner-kicker {
+    color:var(--red);
+    font-size:10px;
+    font-weight:900;
+    letter-spacing:2px;
+}
+
+.banner-content h1 {
+    font-size:36px;
+    font-weight:900;
+    letter-spacing:-1.5px;
+    margin:8px 0;
+}
+
+.banner-content p {
+    color:#b0bac8;
+    font-size:12px;
+}
+
+.banner-season {
+    display:inline-block;
+    margin-top:15px;
+    padding:7px 11px;
+    background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.12);
+    border-radius:6px;
+    font-size:10px;
+    font-weight:700;
+}
+
+/* PAGE VIEWS */
+
+.page-view {
+    display:none;
+    animation:fadeIn .25s ease;
+}
+
+.page-view.active {
+    display:block;
+}
+
+@keyframes fadeIn {
+    from {opacity:0; transform:translateY(5px);}
+    to {opacity:1; transform:translateY(0);}
+}
+
+.page-heading {
+    display:flex;
+    justify-content:space-between;
+    align-items:end;
+    gap:15px;
+    margin-bottom:20px;
+}
+
+.page-heading h2 {
+    font-size:20px;
+    font-weight:900;
+    letter-spacing:-.5px;
+}
+
+.page-heading p {
+    color:var(--muted);
+    font-size:11px;
+    margin-top:5px;
+}
+
+.section-kicker {
+    color:var(--red);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1.5px;
+    margin-bottom:5px;
+}
+
+/* CARDS */
+
+.card {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:11px;
+    overflow:hidden;
+}
+
+.card + .card {
+    margin-top:18px;
+}
+
+.card-header {
+    padding:17px 19px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     border-bottom:1px solid var(--border);
 }
 
-.date-nav button {
-    background:var(--surface2);
-    border:1px solid var(--border);
-    color:var(--muted);
-    padding:9px 15px;
-    border-radius:7px;
-    font-size:11px;
-    font-weight:700;
-    white-space:nowrap;
-    cursor:pointer;
+.card-header h3 {
+    font-size:13px;
+    font-weight:800;
 }
 
-.date-nav button.active {
-    background:var(--red);
-    color:white;
-    border-color:var(--red);
+.card-header small {
+    color:var(--muted);
+    font-size:10px;
+}
+
+.card-body {
+    padding:18px;
+}
+
+/* GRID */
+
+.dashboard-grid {
+    display:grid;
+    grid-template-columns:minmax(0,1fr) 310px;
+    gap:18px;
+    align-items:start;
+}
+
+.stats-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:13px;
+    margin-bottom:20px;
+}
+
+.stat-card {
+    padding:17px;
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+}
+
+.stat-card span {
+    color:var(--muted);
+    font-size:10px;
+    font-weight:700;
+}
+
+.stat-card strong {
+    display:block;
+    font-size:21px;
+    margin-top:7px;
+}
+
+.stat-card small {
+    color:var(--green);
+    font-size:9px;
+}
+
+/* MATCHES */
+
+.match-widget {
+    padding:14px;
+    min-height:180px;
+}
+
+.widget-note {
+    color:var(--muted);
+    font-size:10px;
+    padding:0 15px 14px;
 }
 
 /* TABLE */
 
-.table-area {
+.table-widget {
     padding:12px;
     min-height:300px;
 }
 
-/* SIDEBAR */
+/* CLUBS */
 
-.side-title {
-    font-size:13px;
+.club-grid {
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
+}
+
+.club {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    min-height:130px;
+    padding:18px 10px;
+    text-align:center;
+    transition:.2s;
+}
+
+.club:hover {
+    border-color:var(--red);
+    transform:translateY(-3px);
+}
+
+.club img {
+    width:48px;
+    height:48px;
+    object-fit:contain;
+    margin-bottom:10px;
+}
+
+.club h3 {
+    font-size:11px;
     font-weight:800;
 }
 
-.side-description {
+.club p {
+    color:var(--muted);
+    font-size:9px;
+    margin-top:4px;
+}
+
+/* NEWS */
+
+.news-grid {
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:15px;
+}
+
+.news-card {
+    background:var(--panel);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+}
+
+.news-card img {
+    width:100%;
+    height:150px;
+    object-fit:cover;
+    display:block;
+}
+
+.news-card-content {
+    padding:15px;
+}
+
+.news-card-content span {
+    color:var(--red);
+    font-size:9px;
+    font-weight:900;
+    letter-spacing:1px;
+}
+
+.news-card-content h3 {
+    font-size:13px;
+    line-height:1.6;
+    margin-top:8px;
+}
+
+.news-card-content p {
     color:var(--muted);
     font-size:10px;
-    margin-top:5px;
+    line-height:1.7;
+    margin-top:7px;
 }
 
-.side-content {
-    padding:12px;
+/* INFORMATION */
+
+.info-list {
+    display:flex;
+    flex-direction:column;
 }
 
-/* INFO */
-
-.info-row {
+.info-item {
     display:flex;
     justify-content:space-between;
+    gap:10px;
     padding:13px 0;
     border-bottom:1px solid var(--border);
     font-size:11px;
 }
 
-.info-row:last-child {
+.info-item:last-child {
     border-bottom:0;
 }
 
-.info-row span:first-child {
+.info-item span {
     color:var(--muted);
+}
+
+/* BUTTONS */
+
+.action-link {
+    display:inline-block;
+    padding:9px 13px;
+    background:var(--panel2);
+    border:1px solid var(--border);
+    border-radius:6px;
+    font-size:10px;
+    font-weight:700;
+    color:white;
+}
+
+.action-link:hover {
+    border-color:var(--red);
 }
 
 /* FOOTER */
 
 footer {
-    text-align:center;
     border-top:1px solid var(--border);
-    padding:28px 15px;
+    padding:25px;
+    text-align:center;
     color:var(--muted);
-    font-size:11px;
-    margin-top:45px;
+    font-size:10px;
 }
 
 footer strong {
@@ -321,63 +522,126 @@ footer strong {
 
 /* MOBILE */
 
-@media(max-width:850px) {
-    .content-grid {
+.mobile-header {
+    display:none;
+}
+
+@media(max-width:1050px) {
+    .dashboard-grid {
         grid-template-columns:1fr;
     }
 
-    .container {
-        width:94%;
-    }
-
-    .header {
-        padding:0 4%;
-    }
-
-    .league-header,
-    .main-nav {
-        padding-left:4%;
-        padding-right:4%;
-    }
-
-    .header-right {
-        gap:12px;
+    .club-grid {
+        grid-template-columns:repeat(3,1fr);
     }
 }
 
-@media(max-width:500px) {
-    .header {
-        height:58px;
+@media(max-width:760px) {
+    .sidebar {
+        width:100%;
+        height:auto;
+        position:fixed;
+        top:auto;
+        bottom:0;
+        left:0;
+        right:0;
+        padding:7px 5px calc(7px + env(safe-area-inset-bottom));
+        border-right:0;
+        border-top:1px solid var(--border);
+        background:#151a23;
     }
 
-    .logo {
+    .brand,
+    .side-label,
+    .side-bottom {
+        display:none;
+    }
+
+    .nav-list {
+        flex-direction:row;
+        justify-content:space-around;
+        gap:2px;
+    }
+
+    .nav-link {
+        flex:1;
+        min-width:0;
+        padding:9px 2px;
+        flex-direction:column;
+        justify-content:center;
+        gap:4px;
+        text-align:center;
+        font-size:8px;
+        border-radius:7px;
+    }
+
+    .nav-link.active {
+        box-shadow:inset 0 2px var(--red);
+    }
+
+    .nav-icon {
         font-size:17px;
     }
 
-    .header-right a {
-        font-size:10px;
+    .main {
+        margin-left:0;
+        padding-bottom:80px;
     }
 
-    .league-header {
-        padding-top:20px;
-        padding-bottom:20px;
+    .topbar {
+        height:58px;
+        padding:0 17px;
     }
 
-    .league-info h1 {
-        font-size:20px;
+    .content {
+        padding:18px 14px 35px;
     }
 
-    .league-icon {
-        width:48px;
-        height:48px;
+    .league-banner {
+        min-height:165px;
+        padding:22px;
     }
 
-    .main-nav {
-        gap:22px;
+    .banner-content h1 {
+        font-size:29px;
     }
 
-    .container {
-        margin-top:20px;
+    .stats-grid {
+        gap:8px;
+    }
+
+    .stat-card {
+        padding:12px 10px;
+    }
+
+    .stat-card strong {
+        font-size:17px;
+    }
+
+    .club-grid {
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .news-grid {
+        grid-template-columns:1fr;
+    }
+
+    .page-heading h2 {
+        font-size:17px;
+    }
+}
+
+@media(max-width:390px) {
+    .nav-link {
+        font-size:7px;
+    }
+
+    .nav-icon {
+        font-size:15px;
+    }
+
+    .stats-grid {
+        grid-template-columns:1fr;
     }
 }
 </style>
@@ -385,164 +649,508 @@ footer strong {
 
 <body>
 
-<header class="header">
-    <a href="../" class="logo">DARKALPHA<span>10</span></a>
+<div class="app">
 
-    <div class="header-right">
-        <a href="#matches">Matches</a>
-        <a href="#standings">Standings</a>
+<!-- SIDEBAR NAVIGATION -->
+
+<aside class="sidebar">
+
+    <div class="brand">DARKALPHA<span>10</span></div>
+
+    <div class="side-label">FOOTBALL MENU</div>
+
+    <nav class="nav-list">
+
+        <button class="nav-link active" data-page="overview">
+            <span class="nav-icon">⌂</span>
+            Overview
+        </button>
+
+        <button class="nav-link" data-page="live">
+            <span class="nav-icon">◉</span>
+            Live
+        </button>
+
+        <button class="nav-link" data-page="fixtures">
+            <span class="nav-icon">▦</span>
+            Fixtures
+        </button>
+
+        <button class="nav-link" data-page="results">
+            <span class="nav-icon">◷</span>
+            Results
+        </button>
+
+        <button class="nav-link" data-page="standings">
+            <span class="nav-icon">☷</span>
+            Standings
+        </button>
+
+        <button class="nav-link" data-page="clubs">
+            <span class="nav-icon">♧</span>
+            Clubs
+        </button>
+
+        <button class="nav-link" data-page="news">
+            <span class="nav-icon">▤</span>
+            News
+        </button>
+
+    </nav>
+
+    <div class="side-bottom">
+        LaLiga Football Center<br>
+        Powered by DarkAlpha10
     </div>
-</header>
 
-<div class="league-header">
-    <div class="league-info">
-        <div class="league-icon">🏆</div>
-        <div>
-            <h1>LaLiga</h1>
-            <p>Spain · First Division · 2026/27</p>
+</aside>
+
+<!-- MAIN -->
+
+<main class="main">
+
+    <header class="topbar">
+        <div class="topbar-left">
+            <div class="topbar-title" id="topTitle">Overview</div>
+            <span class="topbar-tag">LALIGA</span>
         </div>
-    </div>
-</div>
 
-<nav class="main-nav">
-    <a href="#matches" class="active">Matches</a>
-    <a href="#standings">Table</a>
-    <a href="#about">Overview</a>
-</nav>
-
-<main class="container">
-
-    <div class="page-title" id="matches">
-        <div>
-            <h2>LaLiga Matches</h2>
-            <p>Scores, fixtures and match updates</p>
+        <div class="topbar-right">
+            Spain · 2026/27
         </div>
-    </div>
+    </header>
 
-    <div class="content-grid">
+    <div class="content">
 
-        <!-- MAIN MATCHES -->
+        <!-- LEAGUE BANNER -->
 
-        <div>
+        <div class="league-banner">
+            <div class="banner-content">
+                <div class="banner-kicker">SPAIN · FIRST DIVISION</div>
+                <h1>LaLiga</h1>
+                <p>The home of Spanish football.</p>
+                <div class="banner-season">2026 / 2027 SEASON</div>
+            </div>
+        </div>
+
+        <!-- OVERVIEW -->
+
+        <section class="page-view active" id="page-overview">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">DASHBOARD</div>
+                    <h2>LaLiga Overview</h2>
+                    <p>Your central place for Spanish football.</p>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span>COMPETITION</span>
+                    <strong>LaLiga</strong>
+                    <small>Spain</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>CLUBS</span>
+                    <strong>20</strong>
+                    <small>Participating teams</small>
+                </div>
+
+                <div class="stat-card">
+                    <span>SEASON</span>
+                    <strong>26/27</strong>
+                    <small>2026 — 2027</small>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Today's Matches</h3>
+                            <small>LaLiga Match Center</small>
+                        </div>
+
+                        <div class="match-widget">
+                            <div class="rotascore-widget"
+                                 data-type="matches"
+                                 data-leagues="vl7oqdehlyr510j"
+                                 data-locale="en">
+                                <noscript>
+                                    <a href="https://www.rotascore.com/en/league/la-liga/vl7oqdehlyr510j">
+                                        LaLiga matches
+                                    </a>
+                                </noscript>
+                            </div>
+                        </div>
+
+                        <div class="widget-note">
+                            Match data provided by Rotascore.
+                        </div>
+                    </div>
+                </div>
+
+                <aside>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Competition Details</h3>
+                        </div>
+
+                        <div class="card-body info-list">
+                            <div class="info-item">
+                                <span>Country</span>
+                                <strong>Spain</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>League</span>
+                                <strong>LaLiga</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>Teams</span>
+                                <strong>20</strong>
+                            </div>
+                            <div class="info-item">
+                                <span>Season</span>
+                                <strong>2026/27</strong>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Official League</h3>
+                        </div>
+                        <div class="card-body">
+                            <p style="font-size:11px;color:var(--muted);line-height:1.8">
+                                Follow the Spanish first division,
+                                its clubs and the race for the title.
+                            </p>
+                            <a class="action-link"
+                               href="https://www.laliga.com/en-GB"
+                               target="_blank"
+                               rel="noopener"
+                               style="margin-top:14px">
+                                LaLiga Website ↗
+                            </a>
+                        </div>
+                    </div>
+                </aside>
+
+            </div>
+        </section>
+
+        <!-- LIVE -->
+
+        <section class="page-view" id="page-live">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">LIVE FOOTBALL</div>
+                    <h2>Live Scores</h2>
+                    <p>Follow today's LaLiga matches and live score updates.</p>
+                </div>
+            </div>
 
             <div class="card">
-                <div class="card-heading">
-                    <h3>Match Center</h3>
-                    <span class="live-dot">LIVE UPDATES</span>
+                <div class="card-header">
+                    <h3>LaLiga Live Center</h3>
+                    <small>Live scores and match times</small>
                 </div>
 
-                <div class="date-nav">
-                    <button class="active" onclick="selectDay(this,'Today')">Today</button>
-                    <button onclick="selectDay(this,'Yesterday')">Yesterday</button>
-                    <button onclick="selectDay(this,'Tomorrow')">Tomorrow</button>
-                </div>
-
-                <div class="widget-area">
+                <div class="match-widget">
                     <div class="rotascore-widget"
                          data-type="matches"
                          data-leagues="vl7oqdehlyr510j"
                          data-locale="en">
-                        <noscript>
-                            <a href="https://www.rotascore.com/en">LaLiga scores by Rotascore</a>
-                        </noscript>
                     </div>
+                </div>
+
+                <div class="widget-note">
+                    Scores and match events are supplied by Rotascore.
                 </div>
             </div>
 
-            <div class="card" id="standings">
-                <div class="card-heading">
-                    <h3>League Table</h3>
-                    <span>LaLiga</span>
+        </section>
+
+        <!-- FIXTURES -->
+
+        <section class="page-view" id="page-fixtures">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">MATCH SCHEDULE</div>
+                    <h2>Fixtures</h2>
+                    <p>LaLiga match schedule and kickoff information.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>LaLiga Matches</h3>
+                    <small>Match schedule</small>
                 </div>
 
-                <div class="table-area">
+                <div class="match-widget">
+                    <div class="rotascore-widget"
+                         data-type="matches"
+                         data-leagues="vl7oqdehlyr510j"
+                         data-locale="en">
+                    </div>
+                </div>
+
+                <div class="widget-note">
+                    The provider controls the displayed match dates.
+                </div>
+            </div>
+
+        </section>
+
+        <!-- RESULTS -->
+
+        <section class="page-view" id="page-results">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">COMPLETED MATCHES</div>
+                    <h2>Results</h2>
+                    <p>LaLiga match scores and results.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>Match Results</h3>
+                    <small>LaLiga</small>
+                </div>
+
+                <div class="card-body">
+                    <p style="color:var(--muted);font-size:12px;line-height:1.8">
+                        Open the LaLiga match center to view completed
+                        matches, scores and match details.
+                    </p>
+
+                    <a class="action-link"
+                       href="https://www.rotascore.com/en/league/la-liga/vl7oqdehlyr510j"
+                       target="_blank"
+                       rel="noopener"
+                       style="margin-top:15px">
+                        View LaLiga Results ↗
+                    </a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- STANDINGS -->
+
+        <section class="page-view" id="page-standings">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">LEAGUE RANKING</div>
+                    <h2>League Standings</h2>
+                    <p>Position, matches, goal difference and points.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h3>LaLiga Table</h3>
+                    <small>2026/27</small>
+                </div>
+
+                <div class="table-widget">
                     <div class="rotascore-widget"
                          data-type="standings"
                          data-leagues="vl7oqdehlyr510j"
                          data-locale="en">
                     </div>
                 </div>
-            </div>
 
-        </div>
-
-        <!-- SIDEBAR -->
-
-        <aside>
-
-            <div class="card">
-                <div class="card-heading">
-                    <div>
-                        <h3 class="side-title">Competition Info</h3>
-                        <p class="side-description">LaLiga EA SPORTS</p>
-                    </div>
-                </div>
-
-                <div class="side-content">
-                    <div class="info-row">
-                        <span>Country</span>
-                        <strong>Spain</strong>
-                    </div>
-
-                    <div class="info-row">
-                        <span>Competition</span>
-                        <strong>LaLiga</strong>
-                    </div>
-
-                    <div class="info-row">
-                        <span>Season</span>
-                        <strong>2026/27</strong>
-                    </div>
-
-                    <div class="info-row">
-                        <span>Teams</span>
-                        <strong>20</strong>
-                    </div>
+                <div class="widget-note">
+                    Current standings supplied by Rotascore.
                 </div>
             </div>
 
-            <div class="card" id="about">
-                <div class="card-heading">
-                    <h3>About LaLiga</h3>
+        </section>
+
+        <!-- CLUBS -->
+
+        <section class="page-view" id="page-clubs">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">TEAMS</div>
+                    <h2>LaLiga Clubs</h2>
+                    <p>Some of the clubs competing in Spanish football.</p>
+                </div>
+            </div>
+
+            <div class="club-grid">
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/81.png" alt="Barcelona">
+                    <h3>FC Barcelona</h3>
+                    <p>Barcelona</p>
                 </div>
 
-                <div class="side-content">
-                    <p style="font-size:12px;line-height:1.9;color:var(--muted)">
-                        LaLiga is the top professional football
-                        division in Spain. Follow its clubs,
-                        fixtures, results and league standings
-                        from this page.
+                <div class="club">
+                    <img src="https://crests.football-data.org/86.png" alt="Real Madrid">
+                    <h3>Real Madrid</h3>
+                    <p>Madrid</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/78.png" alt="Atletico Madrid">
+                    <h3>Atletico Madrid</h3>
+                    <p>Madrid</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/94.png" alt="Villarreal">
+                    <h3>Villarreal CF</h3>
+                    <p>Villarreal</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/559.png" alt="Sevilla">
+                    <h3>Sevilla FC</h3>
+                    <p>Seville</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/77.png" alt="Athletic Club">
+                    <h3>Athletic Club</h3>
+                    <p>Bilbao</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/92.png" alt="Real Sociedad">
+                    <h3>Real Sociedad</h3>
+                    <p>San Sebastian</p>
+                </div>
+
+                <div class="club">
+                    <img src="https://crests.football-data.org/82.png" alt="Getafe">
+                    <h3>Getafe CF</h3>
+                    <p>Getafe</p>
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- NEWS -->
+
+        <section class="page-view" id="page-news">
+
+            <div class="page-heading">
+                <div>
+                    <div class="section-kicker">LATEST STORIES</div>
+                    <h2>Football News</h2>
+                    <p>LaLiga news and editorial updates.</p>
+                </div>
+            </div>
+
+            <div class="news-grid">
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1522778119026-d647f0596c20?auto=format&fit=crop&w=700&q=85" alt="Football stadium">
+                    <div class="news-card-content">
+                        <span>LALIGA</span>
+                        <h3>The race for the Spanish league title</h3>
+                        <p>Follow the clubs competing for the top position.</p>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1508098682722-e99c643e7f0b?auto=format&fit=crop&w=700&q=85" alt="Football match">
+                    <div class="news-card-content">
+                        <span>MATCH DAY</span>
+                        <h3>Every match brings new opportunities</h3>
+                        <p>Explore the latest match schedule and results.</p>
+                    </div>
+                </article>
+
+                <article class="news-card">
+                    <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&w=700&q=85" alt="Football players">
+                    <div class="news-card-content">
+                        <span>FOOTBALL</span>
+                        <h3>Discover the clubs of Spanish football</h3>
+                        <p>Explore teams, stadiums and competition history.</p>
+                    </div>
+                </article>
+
+            </div>
+
+            <div class="card" style="margin-top:20px">
+                <div class="card-body">
+                    <p style="font-size:11px;color:var(--muted);line-height:1.8">
+                        News cards are sample editorial content.
+                        They are not automatically updated news articles.
                     </p>
                 </div>
             </div>
 
-        </aside>
+        </section>
 
     </div>
 
-</main>
+    <footer>
+        LaLiga Central · Built for <strong>DarkAlpha10</strong>
+    </footer>
 
-<footer>
-    <p>LaLiga Football Center · Powered by <strong>DarkAlpha10</strong></p>
-    <p style="margin-top:7px">Match data provided by Rotascore.</p>
-</footer>
+</main>
+</div>
 
 <script async src="https://www.rotascore.com/embed/v1.js"></script>
 
 <script>
-function selectDay(button, day) {
-    document.querySelectorAll(".date-nav button").forEach(btn => {
-        btn.classList.remove("active");
+const navLinks = document.querySelectorAll(".nav-link");
+const pages = document.querySelectorAll(".page-view");
+const topTitle = document.getElementById("topTitle");
+
+const pageNames = {
+    overview: "Overview",
+    live: "Live Scores",
+    fixtures: "Fixtures",
+    results: "Results",
+    standings: "Standings",
+    clubs: "Clubs",
+    news: "News"
+};
+
+function showPage(pageName) {
+    pages.forEach(page => {
+        page.classList.toggle(
+            "active",
+            page.id === "page-" + pageName
+        );
     });
 
-    button.classList.add("active");
+    navLinks.forEach(link => {
+        link.classList.toggle(
+            "active",
+            link.dataset.page === pageName
+        );
+    });
 
-    /*
-      The embedded widget controls its own match dates.
-      This button only changes the selected visual state.
-      It does not claim to filter the external widget.
-    */
+    topTitle.textContent = pageNames[pageName] || "Overview";
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
 }
+
+navLinks.forEach(link => {
+    link.addEventListener("click", () => {
+        showPage(link.dataset.page);
+    });
+});
 </script>
 
 </body>
